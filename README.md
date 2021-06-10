@@ -1,1 +1,0 @@
-# Autonomous_Manufacturing
