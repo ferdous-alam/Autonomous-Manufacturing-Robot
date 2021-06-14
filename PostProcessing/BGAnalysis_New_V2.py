@@ -53,7 +53,7 @@ while len(fft_A) != index:
 frq_A_points = [None] * int(n/2)
 index = 0
 while index < (int(n/2)):
-    frq_A_points[index] = index * df/n * 10**-6
+    frq_A_points[index] = index * df/n
     index += 1
 
 # normalize coefficients of fft of A
@@ -156,43 +156,47 @@ while index < mB:
         N2 = index
         if dbB[index + 1] < My:
             break
+    index += 1
 L1B = frq_B_points[N1]*10**-6
 L2B = frq_B_points[N2]*10**-6
 CfB = (L1B+L2B)/2
 PkB = frq_A_points[index_of_max]*10**-6
 
 #  calculating transfer function
-FAf = frq_A_points[1:mA-1]  # removes zero
-num = fft_A[1:mA-1]     # removes first value bc it is a mean numerator of transfer function
+FAf = frq_A_points[1:mA]  # removes zero
+num = fft_A[1:mA]     # removes first value bc it is a mean numerator of transfer function
 den = fft_B[1:mB]/100  # denominator of transfer function
 TNF = den/num  # output over input
 dbTNF = control.mag2db(TNF) # transfer function converted to decibels
 k1 = 1  # counts number of frequencies contributions below 0.5 MHz
 k2 = 1  # counts number of frequencies contributions above 3.5 MHz
-
-while FAf(k1) < 500000: #Lower Limit 0.5 MHz
-    k1= k1 + 1
-while FAf(k2) <= 3500000:  #Upper Limit 3.5 MHz
-    k2 = k2 + 1
+while FAf[k1] < 500000: #Lower Limit 0.5 MHz
+    k1 += 1
+while FAf[k2] <= 3500000:  #Upper Limit 3.5 MHz
+    k2 += 1
 
 #  Calculating Peak & Central Frequency of the Transfer Function Plots
 dbTNF_lim = dbTNF[k1:k2]   # limit range of transfer function
 FAf_lim = FAf[k1:k2]       # corresponding frequencies for the range
 mC = len(dbTNF_lim)    # length of the limit
-Mx = max[dbTNF_lim]        # max of transfer function
+Mx = max(dbTNF_lim)        # max of transfer function
 My = Mx - 6                # DB threshold
 
 index = 0
-while index<mC:
-    if dbTNF_lim(index) == Mx:
+while index < mC:
+    if dbTNF_lim[index] == Mx:
         index_of_max = index
     index += 1
-index=0
-while index<mC:
-    if dbTNF_lim(index) < My and index < index_of_max:
+index = 0
+while index < mC:
+    if dbTNF_lim[index] < My and index < index_of_max:
         N1 = index
-if dbTNF_lim(index) > My and index > index_of_max:
-    N2 = index
+
+    if dbTNF_lim[index] > My and index > index_of_max:
+        N2 = index
+
+    index += 1
+
 
 L1TF = FAf_lim[N1]*10**-6  # converts MHz to Hz
 L2TF = FAf_lim[N2]*10**-6  # converts MHz to Hz
@@ -200,7 +204,11 @@ CfTF = (L1TF+L2TF)/2     # average
 PkTF = FAf_lim[index_of_max]*10**-6  # converts MHz to Hz
 
 # Plotting Transfer Function PLots
-plt.plot(FAf*10**-6, dbTNF)
+FAf_plot=[]
+for f in FAf:
+    FAf_plot.append(f*10**-6)
+
+plt.plot(FAf_plot, dbTNF)
 plt.xlim([0.5, 4.5])
 plt.ylim([-70, 20])
 plt.xlabel('Frequency [MHz]')
@@ -208,7 +216,6 @@ plt.ylabel('Amplitude [dB]')
 plt.title('Transfer Func (Decibel Scale)')
 plt.grid()
 plt.show()
-
 
 
 # store transfer function data
