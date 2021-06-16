@@ -28,7 +28,7 @@ dt = Total_time/n               # difference in time for plotting
 
 # time for measurements of A and B csv files, goes to n-1 bc at n it repeats !check this
 index = 0
-t = [None]*(n)
+t = [None] * n
 while index < n:
     t[index] = (dt*index*10**6)
     index += 1
@@ -38,7 +38,7 @@ df = 1/dt  # difference between frequency
 
 # set mean value before and after pulse, eliminates noise and reflections for A and B
 No_Reflections_A= [np.mean(A)]*n  # array of mean A and pulse
-No_Reflections_A[SigRangeA_lower:SigRangeB_upper] = A[SigRangeA_lower:SigRangeA_upper]
+No_Reflections_A[SigRangeA_lower:SigRangeA_upper] = A[SigRangeA_lower:SigRangeA_upper]
 
 No_Reflections_B = [np.mean(B)]*n  # array of mean B
 No_Reflections_B[SigRangeB_lower:SigRangeB_upper] = B[SigRangeB_lower:SigRangeB_upper]  # adds the pulse
@@ -64,8 +64,8 @@ while index < int(n/2):
     fft_A_normalized[index] = fft_A[index]/fft_A_max
     index += 1
 
-# ignoring noise for fft A
-index = 1
+
+index = 1   # ignoring noise
 while index < len(fft_A_normalized):
     if fft_A_normalized[index] >= .06:
         fANindex_B = index  # idk what to rename this
@@ -88,7 +88,7 @@ while len(fft_B) != index:
 frq_B_points = [None] * int(n/2)
 index = 0
 while index < (int(n/2)):
-    frq_B_points[index] = index * df/n * 10**-6
+    frq_B_points[index] = index * df/n
     index += 1
 
 # normalize coefficents of fft of B
@@ -98,14 +98,22 @@ fft_B_max = max(fft_B[2:n])
 while index < int(n/2):
     fft_B_normalized[index] = fft_B[index]/fft_B_max
     index += 1
-
 #  plotting fft ISN'T WORKING
-plt.plot(frq_A_points, abs(fft_A))
-plt.plot(frq_B_points, abs(fft_B))
+frq_A_plot = []
+for frq in frq_A_points:
+    frq_A_plot.append(frq*10**-6)
+
+frq_B_plot = []
+for frq in frq_B_points:
+    frq_B_plot.append(frq*10**-6)
+
+plt.plot(frq_A_plot, abs(fft_A))
+plt.plot(frq_B_plot, abs(fft_B))
 plt.xlabel('Frequency [MHz]')
 plt.ylabel('Amplitude [au]')
 plt.title('Frequency Domain')
-plt.xlim([0.2, 5.0])
+plt.xlim([0.2, 5])
+plt.ylim([0, 350])
 plt.legend(['Reference Signal','Sample (d=0.00mm, a=0.00mm)'])
 plt.grid()
 plt.show()
@@ -136,6 +144,7 @@ while index < mA:
 
 L1A = frq_A_points[N1] * 10**-6     # find MHz value of N1
 L2A = frq_A_points[N2] * 10**-6     # find MHz value of N2
+
 CfA = (L1A+L2A)/2       # find average
 PkA = frq_A_points[r_max]*10**-6        # frequency of the wave that has the highest contribution
 dbNB = dbB[1:mB]        # ignores the mean
@@ -160,7 +169,7 @@ while index < mB:
 L1B = frq_B_points[N1]*10**-6
 L2B = frq_B_points[N2]*10**-6
 CfB = (L1B+L2B)/2
-PkB = frq_A_points[index_of_max]*10**-6
+PkB = frq_B_points[index_of_max]*10**-6
 
 #  calculating transfer function
 FAf = frq_A_points[1:mA]  # removes zero
