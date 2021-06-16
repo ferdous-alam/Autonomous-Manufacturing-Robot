@@ -9,7 +9,7 @@ plt.close('all')
 
 # This code is used for FFT, Data collection
 A = genfromtxt('DOE_avg_reference_signal_timedomain.csv')  # Reference signal
-B = genfromtxt('DOE_Ref_SampleA_300V_0dB_50avg_freq-2250kHz_location-7_Block-1_Jan-19-2020_11-18.csv')  # actual signal
+B = genfromtxt('A_Test12_4000.csv')  # actual signal
 
 
 # signal range in time domain. This is lower and upper values are determined by plotting the time domain data to
@@ -116,9 +116,11 @@ plt.xlim([0.2, 5])
 plt.ylim([0, fft_B_max+50])
 plt.legend(['Reference Signal','Sample (d=0.00mm, a=0.00mm)'])
 plt.grid()
+# save frequency domain plot
+plt.savefig('_FreqDomain.jpeg', bbox_inches='tight')
 plt.show()
 
-# 121 Converts amplitude ratio to decibels !!!!clean this up!!!!
+# 121 Converts amplitude ratio to decibels
 dbA = control.mag2db(fft_A_normalized)
 mA = len(dbA)
 dbB = control.mag2db(fft_B_normalized)
@@ -224,7 +226,7 @@ plt.xlabel('Frequency [MHz]')
 plt.ylabel('Amplitude [dB]')
 plt.title('Transfer Func (Decibel Scale)')
 plt.grid()
+# save transfer function plot
+plt.savefig('_TransferFunc_dB.jpeg',bbox_inches='tight')
 plt.show()
 
-
-# store transfer function data
