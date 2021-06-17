@@ -230,3 +230,5 @@ plt.grid()
 plt.savefig('_TransferFunc_dB.jpeg',bbox_inches='tight')
 plt.show()
 
+# store transfer function data
+np.savetxt('_Transmission_data.csv', dbTNF)
