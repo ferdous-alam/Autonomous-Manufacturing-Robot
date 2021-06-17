@@ -107,6 +107,7 @@ frq_B_plot = []
 for frq in frq_B_points:
     frq_B_plot.append(frq*10**-6)
 
+# smooth -plot function on different file-plotting on one file(different module)-calculations on another
 plt.plot(frq_A_plot, abs(fft_A))
 plt.plot(frq_B_plot, abs(fft_B))
 plt.xlabel('Frequency [MHz]')
@@ -120,115 +121,116 @@ plt.grid()
 plt.savefig('_FreqDomain.jpeg', bbox_inches='tight')
 plt.show()
 
-# 121 Converts amplitude ratio to decibels
-dbA = control.mag2db(fft_A_normalized)
-mA = len(dbA)
-dbB = control.mag2db(fft_B_normalized)
-mB = len(dbB)
+# # 121 Converts amplitude ratio to decibels
+# dbA = control.mag2db(fft_A_normalized)
+# mA = len(dbA)
+# dbB = control.mag2db(fft_B_normalized)
+# mB = len(dbB)
+#
+# dbNA = dbA[1:mA]
+# Mx = max(dbNA)
+# My = Mx - 6
+# index = 0
+# while index < mA:
+#     if dbA[index] == Mx:
+#         index_of_max = index
+#     index += 1
+# r_max = index_of_max
+# index = 0
+#
+# while index < mA:
+#     if dbA[index] < My and index < index_of_max:
+#         N1 = index
+#     if dbA[index] > My and index > index_of_max:
+#         N2 = index
+#     index += 1
+#
+# L1A = frq_A_points[N1] * 10**-6     # find MHz value of N1
+# L2A = frq_A_points[N2] * 10**-6     # find MHz value of N2
+#
+# CfA = (L1A+L2A)/2       # find average
+# PkA = frq_A_points[r_max]*10**-6        # frequency of the wave that has the highest contribution
+# dbNB = dbB[1:mB]        # ignores the mean
+# Mx = max(dbNB)          # max decibel of dbNB
+# My = Mx - 6             # decibel threshold
+#
+# index = 0
+# while index < mB:
+#     if dbB[index] == Mx:
+#         index_of_max = index
+#     index += 1
+#
+# index = 0
+# while index < mB:
+#     if dbB[index] <= My and index < index_of_max:
+#         N1 = index
+#     if dbB[index] >= My and index >index_of_max:
+#         N2 = index
+#         if dbB[index + 1] < My:
+#             break
+#     index += 1
+# L1B = frq_B_points[N1]*10**-6
+# L2B = frq_B_points[N2]*10**-6
+# CfB = (L1B+L2B)/2
+# PkB = frq_B_points[index_of_max]*10**-6
+#
+# #  calculating transfer function
+# FAf = frq_A_points[1:mA]  # removes zero
+# num = fft_A[1:mA]     # removes first value bc it is a mean numerator of transfer function
+# den = fft_B[1:mB]/100  # denominator of transfer function
+# TNF = den/num  # output over input
+# dbTNF = control.mag2db(TNF) # transfer function converted to decibels
+# k1 = 1  # counts number of frequencies contributions below 0.5 MHz
+# k2 = 1  # counts number of frequencies contributions above 3.5 MHz
+# while FAf[k1] < 500000: #Lower Limit 0.5 MHz
+#     k1 += 1
+# while FAf[k2] <= 3500000:  #Upper Limit 3.5 MHz
+#     k2 += 1
+#
+# #  Calculating Peak & Central Frequency of the Transfer Function Plots
+# dbTNF_lim = dbTNF[k1:k2]   # limit range of transfer function
+# FAf_lim = FAf[k1:k2]       # corresponding frequencies for the range
+# mC = len(dbTNF_lim)    # length of the limit
+# Mx = max(dbTNF_lim)        # max of transfer function
+# My = Mx - 6                # DB threshold
+#
+# index = 0
+# while index < mC:
+#     if dbTNF_lim[index] == Mx:
+#         index_of_max = index
+#     index += 1
+# index = 0
+# while index < mC:
+#     if dbTNF_lim[index] < My and index < index_of_max:
+#         N1 = index
+#
+#     if dbTNF_lim[index] > My and index > index_of_max:
+#         N2 = index
+#
+#     index += 1
+#
+#
+# L1TF = FAf_lim[N1]*10**-6  # converts MHz to Hz
+# L2TF = FAf_lim[N2]*10**-6  # converts MHz to Hz
+# CfTF = (L1TF+L2TF)/2     # average
+# PkTF = FAf_lim[index_of_max]*10**-6  # converts MHz to Hz
+#
+# # Plotting Transfer Function PLots
+# FAf_plot=[]
+# for f in FAf:
+#     FAf_plot.append(f*10**-6)
 
-dbNA = dbA[1:mA]
-Mx = max(dbNA)
-My = Mx - 6
-index = 0
-while index < mA:
-    if dbA[index] == Mx:
-        index_of_max = index
-    index += 1
-r_max = index_of_max
-index = 0
-
-while index < mA:
-    if dbA[index] < My and index < index_of_max:
-        N1 = index
-    if dbA[index] > My and index > index_of_max:
-        N2 = index
-    index += 1
-
-L1A = frq_A_points[N1] * 10**-6     # find MHz value of N1
-L2A = frq_A_points[N2] * 10**-6     # find MHz value of N2
-
-CfA = (L1A+L2A)/2       # find average
-PkA = frq_A_points[r_max]*10**-6        # frequency of the wave that has the highest contribution
-dbNB = dbB[1:mB]        # ignores the mean
-Mx = max(dbNB)          # max decibel of dbNB
-My = Mx - 6             # decibel threshold
-
-index = 0
-while index < mB:
-    if dbB[index] == Mx:
-        index_of_max = index
-    index += 1
-
-index = 0
-while index < mB:
-    if dbB[index] <= My and index < index_of_max:
-        N1 = index
-    if dbB[index] >= My and index >index_of_max:
-        N2 = index
-        if dbB[index + 1] < My:
-            break
-    index += 1
-L1B = frq_B_points[N1]*10**-6
-L2B = frq_B_points[N2]*10**-6
-CfB = (L1B+L2B)/2
-PkB = frq_B_points[index_of_max]*10**-6
-
-#  calculating transfer function
-FAf = frq_A_points[1:mA]  # removes zero
-num = fft_A[1:mA]     # removes first value bc it is a mean numerator of transfer function
-den = fft_B[1:mB]/100  # denominator of transfer function
-TNF = den/num  # output over input
-dbTNF = control.mag2db(TNF) # transfer function converted to decibels
-k1 = 1  # counts number of frequencies contributions below 0.5 MHz
-k2 = 1  # counts number of frequencies contributions above 3.5 MHz
-while FAf[k1] < 500000: #Lower Limit 0.5 MHz
-    k1 += 1
-while FAf[k2] <= 3500000:  #Upper Limit 3.5 MHz
-    k2 += 1
-
-#  Calculating Peak & Central Frequency of the Transfer Function Plots
-dbTNF_lim = dbTNF[k1:k2]   # limit range of transfer function
-FAf_lim = FAf[k1:k2]       # corresponding frequencies for the range
-mC = len(dbTNF_lim)    # length of the limit
-Mx = max(dbTNF_lim)        # max of transfer function
-My = Mx - 6                # DB threshold
-
-index = 0
-while index < mC:
-    if dbTNF_lim[index] == Mx:
-        index_of_max = index
-    index += 1
-index = 0
-while index < mC:
-    if dbTNF_lim[index] < My and index < index_of_max:
-        N1 = index
-
-    if dbTNF_lim[index] > My and index > index_of_max:
-        N2 = index
-
-    index += 1
-
-
-L1TF = FAf_lim[N1]*10**-6  # converts MHz to Hz
-L2TF = FAf_lim[N2]*10**-6  # converts MHz to Hz
-CfTF = (L1TF+L2TF)/2     # average
-PkTF = FAf_lim[index_of_max]*10**-6  # converts MHz to Hz
-
-# Plotting Transfer Function PLots
-FAf_plot=[]
-for f in FAf:
-    FAf_plot.append(f*10**-6)
-
-plt.plot(FAf_plot, dbTNF)
-plt.xlim([0.5, 4.5])
-plt.ylim([-70, 20])
-plt.xlabel('Frequency [MHz]')
-plt.ylabel('Amplitude [dB]')
-plt.title('Transfer Func (Decibel Scale)')
-plt.grid()
+# plt.plot(FAf_plot, dbTNF)
+# plt.xlim([0.5, 4.5])
+# plt.ylim([-70, 20])
+# plt.xlabel('Frequency [MHz]')
+# plt.ylabel('Amplitude [dB]')
+# plt.title('Transfer Func (Decibel Scale)')
+# plt.grid()
 # save transfer function plot
-plt.savefig('_TransferFunc_dB.jpeg',bbox_inches='tight')
-plt.show()
+# plt.savefig('_TransferFunc_dB.jpeg',bbox_inches='tight')
+# plt.show()
+
 
 # store transfer function data
-np.savetxt('_Transmission_data.csv', dbTNF)
+# np.savetxt('_Transmission_data.csv', dbTNF)
