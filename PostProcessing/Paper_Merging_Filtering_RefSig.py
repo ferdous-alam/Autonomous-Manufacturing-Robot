@@ -1,10 +1,14 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from numpy import fft
 import math
 from numpy import genfromtxt
 from scipy import signal
 
+from scipy.signal.ltisys import TransferFunction as TransFun
+from numpy import polymul,polyadd
 # functions
+
 # Filtering freq localizing basis functions
 def Filtering(trace_data, Fs, num_freq, Data_freq_range, freq_breaks, L_master):
     starting_freq = math.log2(1e6) - 4 * (math.log2(4e6) - math.log2(1e6)) / 4
@@ -22,22 +26,27 @@ def Filtering(trace_data, Fs, num_freq, Data_freq_range, freq_breaks, L_master):
         f.append((Fs / L_master) * freq_temp)
         freq_temp += 1
     i = 0
-    k = 0
     qq = 1
     F = []
     while i < len(freq_full_range):
         # F(i + 1) filter is for F(i)
         # left part of the equation
-        F.append(signal.TransferFunction([(freq_breaks[i] * 2 * np.pi)**1, np.zeros(1, dtype=float,)], 1))
+        F.append(TransFun([(freq_breaks[i] * 2 * np.pi)**1, np.zeros(1, dtype=float,)], 1))
+        k = 0
         while k < i+1:
             den = [1, freq_breaks[k]*2*np.pi]   # coefficient of (s+Pi)
             while qq >= 0:
                 # conv() to get the coefficient of den 1/(s+Pi)^q
                 den = np.convolve(den, [1, freq_breaks[k]*2*np.pi])
                 qq -= 1
-            F[i] = lti(np.polymul(F[i]),np.polymul(signal.TransferFunction([1], den)))
+
+            # this line isn't working correctly ive also tried matmul
+            F[i] = np.dot((F[i]).to_ss(), (TransFun([1], den)).to_ss())
             k += 1
-        [mag, phas] = signal.bode(F[i], f * 2 * np.pi)
+        bode_f = 2 * np.pi * np.asarray(f)
+
+        # this line isnt working error message: "input must be a rank-1 array" but they are both rank 1
+        [mag, phas] = signal.bode(F[i], bode_f)
 
         i += 1
     # merging data with selected frequency localizing basis functions
@@ -57,20 +66,21 @@ def Filtering(trace_data, Fs, num_freq, Data_freq_range, freq_breaks, L_master):
         act_winded = []
         while j<len(act):
             act_winded.append(wind[j]*act[j])
+            j += 1
         # FFT
-        act_winded=[act_winded, np.zeros(L_zero_padding)]   # zero-padding
+        #act_winded=[act_winded, np.zeros(L_zero_padding)]   # zero-padding
 
         L = len(act_winded)
-        ACT = np.fft(act_winded)   #window processed
+        ACT = np.fft.fft(act_winded)   #window processed
         ACT2 = abs(ACT/L_orig)  # normalization by interested signal length
         SSB = ACT2[0: math.floor(L/2)]
         SSB[1:len(SSB)-1] = 2*SSB[1:len(SSB)-1]
         pro_data=SSB
-        [mag, phas] = signal.bode(F[i+3], f*2*np.pi)
+        # [mag, phas] = signal.bode(F[i+3], f*2*np.pi)
 
         k = 0
         while k < len(pro_data):
-            pro_data[k] = pro_data[k]*mag[k]*math.exp(j*phas*np.pi/180)
+            pro_data[k] = pro_data[k]*mag[k]*math.exp(j*phas[k]*np.pi/180)
             k += 1
         i += 1
         #merging multiple experiments from different testing frequencies
@@ -186,8 +196,8 @@ plt.show()
 # merged average reference signal
 avg_ref_sig = 1/TableN*sig_cum
 # remove the first point
-freq = f[1:end]
-Merged_Avg_ref_sig = avg_ref_sig[1:end]
+freq = f[1:]
+Merged_Avg_ref_sig = avg_ref_sig[1:]
 
 plt.figure(5)
 plt.plot(freq, Merged_Avg_ref_sig, color='k')
