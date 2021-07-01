@@ -25,22 +25,23 @@ def Filtering(trace_data, Fs, num_freq, Data_freq_range, freq_breaks, L_master):
     k = 0
     qq = 1
     F = []
-    while i<len(freq_full_range):
+    while i < len(freq_full_range):
+        # F(i + 1) filter is for F(i)
         # left part of the equation
-        F[i] = signal.TransferFunction([(freq_breaks[i] * 2 * np.pi)**1, np.zeros(1 *i)])
+        F.append(signal.TransferFunction([(freq_breaks[i] * 2 * np.pi)**1, np.zeros(1, dtype=float,)], 1))
         while k < i+1:
-            den = [1, freq_breaks(k)*2*np.pi]   # coefficient of (s+Pi)
+            den = [1, freq_breaks[k]*2*np.pi]   # coefficient of (s+Pi)
             while qq >= 0:
                 # conv() to get the coefficient of den 1/(s+Pi)^q
-                den = np.convolve(den, [1, freq_breaks(k)*2*np.pi])
+                den = np.convolve(den, [1, freq_breaks[k]*2*np.pi])
                 qq -= 1
-            F[i]= F[i]*signal.TransferFunction([1],den)
+            F[i] = lti(np.polymul(F[i]),np.polymul(signal.TransferFunction([1], den)))
             k += 1
-        [mag, phas] = signal.bode(F[i], f * 2 * np.pi);
+        [mag, phas] = signal.bode(F[i], f * 2 * np.pi)
 
         i += 1
     # merging data with selected frequency localizing basis functions
-    act_cum=np.zeros(int(L_master/2 + 1))
+    act_cum = np.zeros(int(L_master/2 + 1))
     i = 1
     act = []
     wind = []
@@ -194,5 +195,7 @@ plt.title('Averaged Reference Signal with Merged Multiple Datasets')
 plt.xlabel('Frequency [MHz]')
 plt.ylabel('Amplitude')
 plt.xlim([0, 5e6])
+plt.savefig('/Users/christinad/Desktop/ML/code/Figures/ref_sig/averaged_signal.png')
 plt.show()
+
 
