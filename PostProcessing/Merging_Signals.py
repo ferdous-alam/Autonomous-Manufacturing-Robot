@@ -4,7 +4,7 @@ class processingMergingFFT:
         import csv
         import numpy as np
         from numpy import genfromtxt
-        from datetime import datetime
+        from datetime import date
         import os
 
         # log - based sequence
@@ -17,6 +17,7 @@ class processingMergingFFT:
             freq_full_range.append(2 ** freq_updated)
             freq_updated += incrementing_freq
 
+
         # freq_breaks for freq localizing basis functions
         ending_freq = math.log2(4e6) + 2 * (math.log2(4e6) - math.log2(1e6)) / 4
         freq_updated = starting_freq
@@ -26,7 +27,9 @@ class processingMergingFFT:
             freq_updated += incrementing_freq
         # raw waveform for merging
         data_freq_range = [1 * 1e6, 1.5 * 1e6, 2 * 1e6, 2.75 * 1e6, 4 * 1e6]
+
         num_freq = len(data_freq_range)
+
         Fs = 50e6  # sampling frequency: 50 MHz
 
         # choose the interested segment waveform
@@ -43,14 +46,15 @@ class processingMergingFFT:
             freq_temp += 1
 
         sig_cum=np.zeros(int(L_master/2+1))                  # cumulative signal
+
         trace_data = []
         freq_data = 1000
         # read and merge data with filtering
-        while freq_data<= 4000:
+        while freq_data <= 4000:
             # location of the input files
-            TD_file= 'PnC-signal-TD_d' + str(d) + '_lxy'+ str(lxy)+ '_' + str(sample) + '_freq' +str(freq_data) + 'kHz.csv'
-            file_path = '/Users/christinad/Desktop/ML/code/TD_data/'+ str(TD_file)
-            TD_data =genfromtxt(file_path)
+            TD_file = 'PnC-signal-TD_d' + str(d) + '_lxy'+ str(lxy) + '_' + str(sample) + '_freq' + str(freq_data) + 'kHz.csv'
+            file_path = '/Users/christinad/Desktop/ML/code/TD_data/' + str(TD_file)
+            TD_data = genfromtxt(file_path)
             ii = 0
             while ii< num_freq:
                 # remove basis
@@ -68,15 +72,20 @@ class processingMergingFFT:
         # remove the first point
         freq = f[1:]        # the freq for plotting
         Merged_Avg_Sig = avg_sig[1:]    # the fft of the merged signal
-        today = datetime.now()
+        today = date.today()
         # folder name and file name of the output location
         foldername = '/Users/christinad/Desktop/ML/code/data/merged_data/' + str(sample) + '_' + str(today)
-        os.mkdir(foldername)
+        if not os.path.exists(foldername):
+            os.mkdir(foldername)
         filename = str(foldername) + '/freq.domain.d'+ str(d) + '.lxy' + str(lxy) +'.csv'
         file_t = open(filename, 'w')
-        writer = csv.writer(file_t)
-        writer.writerow(Merged_Avg_Sig)
+        index_merged=0
+        while index_merged < len(Merged_Avg_Sig):
+            file_t.write((str(Merged_Avg_Sig[index_merged])))
+            file_t.write('\n')
+            index_merged+=1
 
+        file_t.close()
 
         return freq, Merged_Avg_Sig
 
@@ -89,7 +98,7 @@ class processingMergingFFT:
         freq, Merged_Avg_Sig = pmFFT.TimeToFreq(d, lxy, sample)
         plt.figure()
         plt.plot(freq, Merged_Avg_Sig)
-        plt.title('Averged Signal with Merged Multiple Datasets')
+        plt.title('Averaged Signal with Merged Multiple Datasets')
         leg = str(sample) + '   d: ' + str(d) + '   lxy: ' + str(lxy)
         plt.legend(leg)
         plt.xlabel('Frequency [MHz]')
@@ -189,7 +198,7 @@ class processingMergingFFT:
         import matplotlib.pyplot as plt
         import numpy as np
         from numpy import genfromtxt
-        t = np.linspact(0, 80, 4000)
+        t = np.linspace(0, 80, 4000)
         freq_data = 1000
         # read and merge data with filtering
         while freq_data <= 4000:
@@ -199,15 +208,11 @@ class processingMergingFFT:
             file_path = '/Users/christinad/Desktop/ML/code/TD_data/' + str(TD_file)
             TD_data = genfromtxt(file_path)
             # data check; plot time domain
-            plt.figure(1)
             plt.plot(t, TD_data)
-            plt.title('Time Domain d:' + str(d) + ' lxy:' + str(lxy))
+            plt.title('Time Domain d:' + str(d) + ' lxy:' + str(lxy) +' '+ str(sample))
+            plt.title('Time Domain d:' + str(d) + ' lxy:' + str(lxy) +' '+ str(sample))
             plt.xlabel('time [micro second]')
             plt.ylabel('Amplitude')
-
             freq_data += 250
-
-
-    def plotTwo(self, d1, lxy1, d2, lxy2):
-        import matplotlib.pyplot as plt
+        plt.show()
 
