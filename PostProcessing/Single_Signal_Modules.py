@@ -3,11 +3,11 @@ class processingFFT:
         from numpy import genfromtxt
         from scipy.fftpack import fft
         import numpy as np
-        A = genfromtxt(filename)
+        filepath = '/Users/christinad/Desktop/ML/code/data/TD_data/'
+        A = genfromtxt(filepath + filename)
 
-        # I need to fix the ranges 6/21
         SigRangeA_lower = 649
-        SigRangeA_upper = 2140
+        SigRangeA_upper = 2150
         Sampling_frequency = 50 * 10 ** 6  # Sampling Frequency (MHz): 50; 25; 12.5; 6.25
 
         n = len(A) + 1  # number of data points !for some reason len function is returning 3999 instead of 4000
@@ -45,20 +45,6 @@ class processingFFT:
             frq_A_plot.append(frq * 10 ** -6)
 
         return fft_A, frq_A_plot
-    
-    def plotTimeDomain(self, filename):
-        import matplotlib.pyplot as plt
-        from numpy import genfromtxt
-         A = genfromtxt(filename)
-        plt.plot(A)
-        plt.xlabel('Time')
-        plt.ylabel('Amplitude')
-        plt.title('Time Domain')
-        plt.grid()
-        # save frequency domain plot
-        plt.savefig('_TimeDomain.jpeg', bbox_inches='tight')
-        plt.show()
-         
 
     def plot(self, filename):
         import matplotlib.pyplot as plt
@@ -76,11 +62,24 @@ class processingFFT:
         # save frequency domain plot
         plt.savefig('_FreqDomain.jpeg', bbox_inches='tight')
         plt.show()
-
-    def plotWithReference(self, filenameRef, filename):
+        
+    def plotTimeDomain(self, filename):
+        import matplotlib.pyplot as plt
+        from numpy import genfromtxt
+        A = genfromtxt(filename)
+        plt.plot(A)
+        plt.xlabel('Time')
+        plt.ylabel('Amplitude')
+        plt.title('Time Domain')
+        plt.grid()
+        # save frequency domain plot
+        plt.savefig('_TimeDomain.jpeg', bbox_inches='tight')
+        plt.show()
+'''
+    def plotWithReference(self, fileref, filename):
         import matplotlib.pyplot as plt
         ppfft = processingFFT()
-        fftA, frqA = ppfft.calcfft(filenameRef)
+        fftA, frqA = ppfft.calcfft(fileref)
         fftB, frqB = ppfft.calcfft(filename)
         fftA_max = max(fftA[2:len(fftA)])
         fftB_max = max(fftB[2:len(fftB)])
@@ -100,3 +99,4 @@ class processingFFT:
         # save frequency domain plot
         plt.savefig('_FreqDomain.jpeg', bbox_inches='tight')
         plt.show()
+'''
