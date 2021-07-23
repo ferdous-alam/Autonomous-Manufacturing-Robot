@@ -3,7 +3,7 @@ This repo contains all codes and related documentations for Autonomous Manufactu
 
 
 ## Contributors: 
-Md Ferdous Alam
+Md Ferdous Alam, Christina Duong, Sarp Sezer
 
 ## References: 
 1. Md Ferdous Alam, Max Shtein, Kira Barton & David J. Hoelzle, “[A  physics guided reinforcement learning framework for an autonomous manufacturing system with expensive data](),” **[(ACC 2021)](https://acc2021.a2c2.org/)**. 
