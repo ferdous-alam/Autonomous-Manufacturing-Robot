@@ -20,10 +20,10 @@ class CognitionAlgorithms:
         epsilon = 0.05
         # ----------------------------------
 
-        if current_state is None:
+        if current_state[0] is None and current_state[1] is None:
             # special case for first iteration
             # choose random sample
-            x1, x2 = np.random.randint(20, 40), np.random.randint(20, 40)
+            x1, x2 = np.random.randint(0, 67), np.random.randint(0, 67)
             next_state = [x1, x2]  # index of PnC sample
         else:
             action = epsilon_greedy_policy(self.Q_table, self.action_space, current_state, epsilon)
