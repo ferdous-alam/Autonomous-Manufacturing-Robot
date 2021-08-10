@@ -3,7 +3,7 @@ from test_algos import CognitionAlgorithms
 
 
 class PnCDimension:
-    def __init__(self, reward_history, lxy=None, dia=None):
+    def __init__(self, reward_history, lxy, dia):
         self.reward_history = reward_history
         self.lxy = lxy
         self.dia = dia

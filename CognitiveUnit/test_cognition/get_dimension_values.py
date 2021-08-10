@@ -17,7 +17,7 @@ def get_dia(reward_history, lxy_prev=None, dia_prev=None):
 
 if __name__ == "__main__":
     reward_history = [1, 2, 4]
-    lxy = get_lxy(reward_history)
-    dia = get_dia(reward_history)
+    lxy = get_lxy(reward_history, 1, 2)
+    dia = get_dia(reward_history, 1, 2)
     print(lxy)
     print(dia)
