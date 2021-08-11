@@ -44,13 +44,12 @@ class CognitionAlgorithms:
         best_next_action_index = np.argmax(self.Q_table[next_state[0], next_state[1], :])
 
         reward = reward_history[-1]     # last element as reward
-        print(self.Q_table[current_state[0], current_state[1], action_index])
 
         self.Q_table[current_state[0], current_state[1], action_index] += self.alpha * (
                 reward + self.gamma * self.Q_table[next_state[0], next_state[1], best_next_action_index] -
                 self.Q_table[current_state[0], current_state[1], action_index])
-        print(self.Q_table[current_state[0], current_state[1], action_index])
-        return self.Q_table
+
+        return self.Q_table, action, current_state, next_state, reward
 
 
 if __name__ == "__main__":
@@ -75,7 +74,6 @@ if __name__ == "__main__":
     print(next_state)
     print(Q_table_before[state[0], state[1], :])
     print(Q_table_updated[state[0], state[1], :])
-
 
 
 

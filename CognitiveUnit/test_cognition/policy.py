@@ -20,10 +20,11 @@ def epsilon_greedy_policy(Q_table, action_space, state, epsilon):
     :return: action: action suggested by the epsilon-greedy policy
     """
     number = np.random.random_sample()
+
     if number <= epsilon:
-        action_idx = np.random.choice(len(action_space))
+         action_idx = np.random.choice(len(action_space))
     else:
-        action_idx = np.argmax(Q_table[state[0], state[1], :])
+         action_idx = np.argmax(Q_table[state[0], state[1], :])
 
     action = action_space[action_idx]
 
