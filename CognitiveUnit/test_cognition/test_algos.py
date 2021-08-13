@@ -17,10 +17,9 @@ def params():
     return alpha, gamma, epsilon, action_space
 
 
-def implement_policy(reward_history, lxy, dia):
+def implement_policy(reward_history, current_state):
     # ----------------------------------
     Q_table = np.load('Q_table.npy')
-    current_state = [lxy, dia]
     alpha, gamma, epsilon, action_space = params()
 
     if current_state[0] is None and current_state[1] is None:
@@ -44,14 +43,13 @@ def update_Q_table(current_state, action, next_state, reward_history):
 
     reward = reward_history[-1]     # last element as reward
 
-    print(Q_table[current_state[0], current_state[1], action_index])
     Q_table[current_state[0], current_state[1], action_index] += alpha * (
             reward + gamma * Q_table[next_state[0], next_state[1], best_next_action_index] -
             Q_table[current_state[0], current_state[1], action_index])
 
     # save updated Q-table
     np.save('Q_table.npy', Q_table)
-    print(Q_table[current_state[0], current_state[1], action_index])
+
 
     return Q_table, reward
 

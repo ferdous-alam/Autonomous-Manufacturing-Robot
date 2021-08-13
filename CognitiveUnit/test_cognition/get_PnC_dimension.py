@@ -1,5 +1,5 @@
 import numpy as np
-from test_algos import CognitionAlgorithms
+from test_algos import *
 
 
 class PnCDimension:
@@ -11,11 +11,10 @@ class PnCDimension:
 
     def get_PnC_dimension(self):
         if self.lxy is not None and self.dia is not None:
-            algo = CognitionAlgorithms()
-            state = algo.Q_learning_vanilla(self.reward_history, self.current_state)
+            state, action = implement_policy(self.reward_history, self.current_state)
         else:
-            algo = CognitionAlgorithms()
-            state = algo.Q_learning_vanilla(self.reward_history, self.current_state)
+            state, action = implement_policy(self.reward_history, self.current_state)
 
         PnC_dimension = state
-        return PnC_dimension
+        return PnC_dimension, action
+

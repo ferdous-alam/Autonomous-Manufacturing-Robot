@@ -3,7 +3,7 @@ from get_PnC_dimension import PnCDimension
 
 def get_lxy(reward_history, lxy_prev=None, dia_prev=None):
     PnC = PnCDimension(reward_history, lxy_prev, dia_prev)
-    PnC_dim = PnC.get_PnC_dimension()
+    PnC_dim, action = PnC.get_PnC_dimension()
     lxy = PnC_dim[0]
     lxy = float(lxy)
     return lxy
@@ -11,10 +11,12 @@ def get_lxy(reward_history, lxy_prev=None, dia_prev=None):
 
 def get_dia(reward_history, lxy_prev=None, dia_prev=None):
     PnC = PnCDimension(reward_history, lxy_prev, dia_prev)
-    PnC_dim = PnC.get_PnC_dimension()
+    PnC_dim, action = PnC.get_PnC_dimension()
     dia = PnC_dim[1]
     dia = float(dia)
     return dia
+
+
 
 
 if __name__ == "__main__":

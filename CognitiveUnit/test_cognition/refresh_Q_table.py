@@ -27,9 +27,10 @@ if __name__ == "__main__":
     action_space = [[0, 1], [0, -1], [-1, 0], [1, 0], [1, 1],
                          [-1, 1], [-1, -1], [1, -1], [0, 0]]
 
-    for i in range(1):
+    for i in range(15):
         sample_count = i+1
-        next_state, action = implement_policy(reward_history, lxy_old, dia_old)
+        current_state = [lxy_old, dia_old]
+        next_state, action = implement_policy(reward_history, current_state)
         lxy_new, dia_new = next_state
         lxy_action, dia_action = action
         action_idx = action_space.index(action)
@@ -43,5 +44,5 @@ if __name__ == "__main__":
 
         Q_table_new = np.load('Q_table.npy')
         print(f'Q_new: {Q_table_new[lxy_old, dia_old, action_idx]}')
-        
+        print('------------------------')
         lxy_old, dia_old = lxy_new, dia_new
