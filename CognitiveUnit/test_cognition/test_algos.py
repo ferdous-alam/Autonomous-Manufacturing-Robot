@@ -16,30 +16,20 @@ class CognitionAlgorithms:
         self.gamma = 0.98
         self.epsilon = 0.05
 
-    def find_next_state(self, current_state):
+    def Q_learning_vanilla(self, reward_history, lxy, dia):
         # ----------------------------------
+        current_state = [lxy, dia]
+        if current_state[0] is None and current_state[1] is None:
+            x1, x2 = np.random.randint(0, 67), np.random.randint(0, 67)
+            current_state = [x1, x2]
         action = epsilon_greedy_policy(self.Q_table, self.action_space, current_state, self.epsilon)
-        next_state = current_state
+        next_state = np.copy(current_state)
         next_state[0] = min(max(current_state[0] + action[0], 0), 67)
         next_state[1] = min(max(current_state[1] + action[1], 0), 67)
 
         return next_state, action
 
-    def Q_learning_vanilla(self, reward_history, current_state):
-
-        if current_state[0] is None and current_state[1] is None:
-            # special case for first iteration
-            # choose random sample
-            x1, x2 = np.random.randint(0, 67), np.random.randint(0, 67)
-            next_state = [x1, x2]  # index of PnC sample
-        else:
-            next_state, action = self.find_next_state(current_state)
-
-        return next_state
-
-    def update_Q_table(self, reward_history, current_state):
-        next_state, action = self.find_next_state(current_state)
-
+    def update_Q_table(self, current_state, action, next_state, reward_history):
         action_index = self.action_space.index(action)
         best_next_action_index = np.argmax(self.Q_table[next_state[0], next_state[1], :])
 
@@ -49,31 +39,6 @@ class CognitionAlgorithms:
                 reward + self.gamma * self.Q_table[next_state[0], next_state[1], best_next_action_index] -
                 self.Q_table[current_state[0], current_state[1], action_index])
 
-        return self.Q_table, action, current_state, next_state, reward
-
-
-if __name__ == "__main__":
-    Q_table_before = np.load('Q_hat.npy')
-    reward_history = [1000, 2000, 3000, 4000]
-    state = [20, 20]
-    algo = CognitionAlgorithms()
-    next_state = algo.Q_learning_vanilla(reward_history, state)
-    Q_table_updated = algo.update_Q_table(reward_history, state)
-    print('iteration 1----------')
-    print(next_state)
-    print(Q_table_before[state[0], state[1], :])
-    print(Q_table_updated[state[0], state[1], :])
-
-
-    print('iteration 2----------')
-    reward_history.append(10000)
-    state = [20, 20]
-    algo = CognitionAlgorithms()
-    next_state = algo.Q_learning_vanilla(reward_history, state)
-    Q_table_updated = algo.update_Q_table(reward_history, state)
-    print(next_state)
-    print(Q_table_before[state[0], state[1], :])
-    print(Q_table_updated[state[0], state[1], :])
-
+        return self.Q_table, reward
 
 
