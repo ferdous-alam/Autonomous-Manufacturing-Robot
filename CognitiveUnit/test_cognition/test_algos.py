@@ -37,7 +37,8 @@ def update_Q_table(current_state, action, next_state, reward_history):
     # load previous Q-table from previous timestep
     Q_table = np.load('Q_table.npy')
     alpha, gamma, epsilon, action_space = params()
-
+    
+    action = action.tolist()
     action_index = action_space.index(action)
     best_next_action_index = np.argmax(Q_table[next_state[0], next_state[1], :])
 
@@ -51,6 +52,6 @@ def update_Q_table(current_state, action, next_state, reward_history):
     np.save('Q_table.npy', Q_table)
 
 
-    return Q_table, reward
+    return None
 
 
