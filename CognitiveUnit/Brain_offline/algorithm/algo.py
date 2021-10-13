@@ -34,7 +34,7 @@ def run_offline_feedback(iter_num):
             load the trained Q-table using the original FEM source reward
         """
         all_initial_states = []
-        # get the fixed intial condition for the first iteration
+        # get the fixed initial condition for the first iteration
         initial_state = [1, 2]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
         all_initial_states.append(initial_state)
         np.save('data/all_initial_states.npy', all_initial_states)  # save initial state info
@@ -56,22 +56,25 @@ def run_offline_feedback(iter_num):
     # update dump file with relevant information --->
     lxy = np.arange(700, 1100, 50)
     dia = np.arange(350, 650, 50)
-    artifact_dimension = [dia[next_state[0]], lxy[next_state[1]]]
+    artifact_dimension_prev = [dia[state[0]], lxy[state[1]]]
+    artifact_dimension_next = [dia[next_state[0]], lxy[next_state[1]]]
+
     details = "iteration number: {} ########################## \n"\
               "     Artifact printing step: -----------------> \n"\
               "         starting_state: {}, \n "\
               "         action_taken: {}, \n"\
               "         artifact_indices: {}, \n"\
-              "         artifact_to_be_printed: {} micro meters\n".format(
+              "         artifact_to_be_printed_now: {} micro meters\n" \
+              "         artifact_to_be_printed_next: {} micro meters\n".format(
                 iter_num + 1, state, opt_action, next_state,
-                artifact_dimension) + "\n" + "\n"
+                artifact_dimension_prev, artifact_dimension_next) + "\n" + "\n"
     log_file.write(details)
     log_file.close()
 
     # return the indices of the artifact to be printed
-    artifact_indices = next_state
+    artifact_to_be_printed = artifact_dimension_prev
 
-    return artifact_indices
+    return artifact_to_be_printed
 
 
 def run_offline_update(iter_num):
