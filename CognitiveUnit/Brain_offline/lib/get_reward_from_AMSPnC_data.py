@@ -8,7 +8,7 @@ def get_reward_from_AMSPnC_data(iter_num):
     # load real-time reward csv file
     reward_history = []
     with open('data/reward_history.csv', newline='') as csv_file:
-        reward_reader = csv.reader(csv_file, delimiter=' ')
+        reward_reader = csv.reader(csv_file, delimiter=',')
         for row in reward_reader:
             reward_history.append(float(row[0]))
 
