@@ -1,5 +1,7 @@
 import numpy as np
+import csv
 from environment.PnCMfg import PnCMfg
+from lib.get_reward_from_AMSPnC_data import get_reward_from_AMSPnC_data
 from lib.get_optimal_policy import get_optimal_policy
 from visualizations import visualize_samples as vo
 
@@ -61,9 +63,9 @@ def run_offline_feedback(iter_num):
 
     details = "iteration number: {} ########################## \n"\
               "     Artifact printing step: -----------------> \n"\
-              "         starting_state: {}, \n "\
+              "         current_state: {}, \n "\
               "         action_taken: {}, \n"\
-              "         artifact_indices: {}, \n"\
+              "         next_state: {}, \n"\
               "         artifact_to_be_printed_now: {} micro meters\n" \
               "         artifact_to_be_printed_next: {} micro meters\n".format(
                 iter_num + 1, state, opt_action, next_state,
@@ -79,10 +81,17 @@ def run_offline_feedback(iter_num):
 
 def run_offline_update(iter_num):
     exp_num = 1  # DO NOT CHANGE, THIS IS FIXED!!
+
+    # load real-time reward csv file
+    reward = get_reward_from_AMSPnC_data(iter_num)
+
+    print(reward)
+
     log_file = open("dump/experiment_no_{}_details.txt".format(exp_num), "a")
     details = "     Brain update step: -----------------> \n"\
               "         No update required: offline execution of source optimal policy \n " \
-              " ------------------------------------------------------- " + "\n" + "\n"\
+              "         reward: {}\n" \
+              " ------------------------------------------------------- ".format(reward) + "\n" + "\n"\
 
     log_file.write(details)
     log_file.close()
