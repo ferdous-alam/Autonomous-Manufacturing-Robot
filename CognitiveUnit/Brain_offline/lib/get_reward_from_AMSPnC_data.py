@@ -11,14 +11,15 @@ def get_reward_from_AMSPnC_data(iter_num):
         reward_reader = csv.reader(csv_file, delimiter=' ')
         for row in reward_reader:
             reward_history.append(float(row[0]))
-    # get the reward value from AMSPnC
-    # corresponding to the requested iteration number
-    reward = reward_history[iter_num]
 
     # create new folder for this iteration and save rewards
     directory = f'data/iter{iter_num+1}'
     if not os.path.exists(directory):
         os.makedirs(directory)
     np.save(f'data/iter{iter_num+1}/rewards.npy', reward_history)
+
+    # get the reward value from AMSPnC
+    # corresponding to the requested iteration number
+    reward = reward_history[-1]
 
     return reward
