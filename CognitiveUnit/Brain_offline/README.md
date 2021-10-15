@@ -8,7 +8,8 @@ This is the policy learned from the source task; 48 FEM simulations. During this
 4. Make sure **sample_count = 1** in the LABVIEW file, measures have been taken to match the MATLAB vs Python indices
 
 ## Example dump file 
--   iteration number: 1 ########################## 
+```
+ iteration number: 1 ########################## 
         Artifact printing step: -----------------> 
             current_state: [1, 2], 
             action_taken: [1, 1], 
@@ -49,3 +50,4 @@ This is the policy learned from the source task; 48 FEM simulations. During this
             No update required: offline execution of source optimal policy 
             reward: 1115564.0
     ------------------------------------------------------- 
+```
