@@ -29,7 +29,7 @@ This is the policy learned from the target task directly using vanilla Q-learnin
             trajectory:---> s_t: [400, 800], a_t: [1, 1], r: [450, 850], s_t+1: 9.5656 
             Q[s_t, a_t] before update: [0. 0. 0. 0. 0. 0. 0. 0. 0.]
             Q[s_t, a_t] after update: [0.     0.     0.     0.     4.7828 0.     0.     0.     0.    ]
-     ------------------------------------------------------- 
+    ------------------------------------------------------- 
 
     iteration number: 2 ########################## 
         Artifact printing step: -----------------> 
