@@ -33,9 +33,9 @@ def run_update(iter_num):
     return None
 
 
-if __name__ == "__main__":
-    for i in range(3):
-        val = run_algo(i)
-        print(val)
-        run_update(i)
+# if __name__ == "__main__":
+#    for i in range(3):
+#        val = run_algo(i)
+#        print(val)
+#        run_update(i)
 
