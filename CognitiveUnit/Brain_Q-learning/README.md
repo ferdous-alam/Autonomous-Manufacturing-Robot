@@ -13,9 +13,8 @@ This is the policy learned from the target task directly using vanilla Q-learnin
 8. Learning parameter chosen as: alpha = 0.5 
 9. Discount factor chosen as: gamma = 0.99
 
-
 ## Example dump file 
--  iteration number: 1 ########################## 
+-   iteration number: 1 ########################## 
         Artifact printing step: -----------------> 
             current_state: [1, 2], 
             action_taken: [1, 1], 
@@ -46,3 +45,4 @@ This is the policy learned from the target task directly using vanilla Q-learnin
             Q[s_t, a_t] before update: [0. 0. 0. 0. 0. 0. 0. 0. 0.]
             Q[s_t, a_t] after update: [0.       0.       0.       4.616325 0.       0.       0.       0.    0.    ]
     ------------------------------------------------------- 
+
