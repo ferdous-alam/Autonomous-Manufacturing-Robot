@@ -21,5 +21,4 @@ def get_reward_from_AMSPnC_data(iter_num):
     # get the reward value from AMSPnC
     # corresponding to the requested iteration number
     reward = reward_history[iter_num]
-
     return reward
