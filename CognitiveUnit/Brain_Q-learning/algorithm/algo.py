@@ -40,7 +40,9 @@ def run_Q_learning_feedback(iter_num):
         """
         all_initial_states = []
         # get the fixed initial condition for the first iteration
-        initial_state = [1, 2]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
+        # initial_state = [1, 2]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
+        # initial_state = [1, 6]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
+        initial_state = [3, 1]
         all_initial_states.append(initial_state)
         np.save('data/all_initial_states.npy', all_initial_states)  # save initial state info
 
