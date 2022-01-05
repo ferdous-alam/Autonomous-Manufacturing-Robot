@@ -1,9 +1,11 @@
 # Autonomous-Manufacturing
 This repo contains all codes and related documentations for Autonomous Manufacturing project from HRL lab, MAE, OSU. 
 
-
 ## Contributors: 
-Md Ferdous Alam, Christina Duong, Sarp Sezer
+Md Ferdous Alam, Sarp Sezer
+
+## Previous undergraduate interns:
+Christina Duong
 
 ## References: 
 1. Md Ferdous Alam, Max Shtein, Kira Barton & David J. Hoelzle, “[A  physics guided reinforcement learning framework for an autonomous manufacturing system with expensive data](),” **[(ACC 2021)](https://acc2021.a2c2.org/)**. 
