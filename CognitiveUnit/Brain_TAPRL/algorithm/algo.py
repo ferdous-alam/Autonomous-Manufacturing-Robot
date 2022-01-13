@@ -16,7 +16,7 @@ def run_TAPRL_feedback(iter_num):
     if iter_num == 0:
         # initial_state = [3, 1]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
         # initial_state = [1, 6]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
-        initial_state = [2, 4]
+        initial_state = [1, 2]
         state = initial_state
 
         # initialize the following for later usages
@@ -27,7 +27,6 @@ def run_TAPRL_feedback(iter_num):
         options_performance = []   # initialize an empty list of the performances of all current options
         # load trained source Q-table
         Q_table = np.load('data/Q_trained_source _original.npy')
-        stored_states.append(state)  # append state to the stored states
         # save cache files
         np.save('dump/options_cache.npy', options_cache)       # save in dump folder
         np.save('dump/options_states_cache.npy', options_states_cache)  # save in dump folder
