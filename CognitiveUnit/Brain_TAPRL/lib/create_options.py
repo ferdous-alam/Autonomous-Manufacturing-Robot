@@ -41,7 +41,6 @@ class CreateOptions:
             # update state
             state = next_state
         option_states.append(state)
-
         return option, option_rewards, option_states
 
     def greedy_option(self, Delta):
@@ -101,9 +100,9 @@ class CreateOptions:
 
 
 if __name__ == "__main__":
-    create_options = CreateOptions([1, 2], 3, 0.75, 3)
+    create_options = CreateOptions([2, 4], 3, 0.75, 3)
     options_set, options_rewards_set, options_states_set = create_options.create_options()
-
+    print(options_set)
     # # viz
     # plot_options(options_states_set)
 

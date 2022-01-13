@@ -39,6 +39,5 @@ if __name__ == "__main__":
 
     for i in range(5):
         val = run_algo(i)
-        print(val)
         run_update(i)
 

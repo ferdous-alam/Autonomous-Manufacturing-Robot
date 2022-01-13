@@ -16,7 +16,7 @@ def run_TAPRL_feedback(iter_num):
     if iter_num == 0:
         # initial_state = [3, 1]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
         # initial_state = [1, 6]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
-        initial_state = [1, 2]
+        initial_state = [2, 4]
         state = initial_state
 
         # initialize the following for later usages
@@ -35,10 +35,15 @@ def run_TAPRL_feedback(iter_num):
         np.save('dump/options_performance.npy', options_performance)  # save in dump folder
         np.save('data/Q_table.npy', Q_table)  # save in a different name to overwrite later
         np.save('data/stored_states.npy', stored_states)  # save in a different name to overwrite later
-
     else:
         state_cache = np.load('dump/current_state_cache.npy')   # saved state from update module
         state = state_cache.tolist()
+
+    stored_states = np.load('data/stored_states.npy')
+    stored_states = stored_states.tolist()
+    stored_states.append(state)  # append state to the stored states
+    np.save('data/stored_states.npy', stored_states)  # save in a different name to overwrite later
+
     artifact_dimension = indices_to_artifact_dims(state)
 
     # ------- update log file ------------------
@@ -124,6 +129,8 @@ def run_TAPRL_update(iter_num):
         options, options_rewards, options_states = co.create_options()
         options_cache = options
         options_states_cache = [options_states[j][-1] for j in range(len(options_states))]
+        # if duplicate states are needed to be removed
+        # options_states_cache = [list(t) for t in set(tuple(element) for element in options_states_cache)]
         running_options_states = np.copy(options_states_cache)
         log_file = open("experiment_no_{}_details.txt".format(exp_num), "a")
         option_create_details = "          Option creation: -----------------> \n"\
