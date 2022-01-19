@@ -15,8 +15,8 @@ def run_TAPRL_feedback(iter_num):
 
     if iter_num == 0:
         # initial_state = [3, 1]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
-        # initial_state = [1, 6]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
-        initial_state = [1, 2]
+        initial_state = [1, 6]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
+        # initial_state = [1, 2]
         state = initial_state
 
         # initialize the following for later usages
