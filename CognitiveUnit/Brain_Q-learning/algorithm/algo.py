@@ -20,7 +20,6 @@ def run_Q_learning_feedback(iter_num):
     # load trained Q-table and source reward function
     R_source = np.load('data/source_reward.npy')
     R_source = R_source.T
-    Q_table = np.load('data/Q_table.npy')  # save in a different name to overwrite later
 
     # exploration factor
     epsilon = 0.10
@@ -51,6 +50,8 @@ def run_Q_learning_feedback(iter_num):
     all_initial_states = np.load('data/all_initial_states.npy')
     all_initial_states = all_initial_states.tolist()   # save as a list for appending
     state = all_initial_states[-1]
+
+    Q_table = np.load('data/Q_table.npy')  # save in a different name to overwrite later
 
     # get optimal action from the optimal policy
     env = PnCMfg('source', R_source)
