@@ -20,7 +20,7 @@ def run_Q_learning_feedback(iter_num):
     # load trained Q-table and source reward function
     R_source = np.load('data/source_reward.npy')
     R_source = R_source.T
-    Q_table = np.load('data/Q_trained_source.npy')
+    Q_table = np.load('data/Q_table.npy')  # save in a different name to overwrite later
 
     # exploration factor
     epsilon = 0.10
@@ -44,6 +44,8 @@ def run_Q_learning_feedback(iter_num):
         # initial_state = [1, 6]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
         initial_state = [3, 1]
         all_initial_states.append(initial_state)
+        Q_table = np.load('data/Q_trained_source.npy')
+        np.save('data/Q_table.npy', Q_table)  # save in a different name to overwrite later
         np.save('data/all_initial_states.npy', all_initial_states)  # save initial state info
 
     all_initial_states = np.load('data/all_initial_states.npy')
@@ -141,6 +143,8 @@ def run_Q_learning_update(iter_num):
     dia = np.arange(350, 650, 50)
     current_state_dimensions = [dia[current_state[0]], lxy[current_state[1]]]
     next_state_dimensions = [dia[next_state[0]], lxy[next_state[1]]]
+
+    np.save('data/Q_table.npy', Q_table)  # save Q-table
 
     log_file = open("dump/experiment_no_{}_details.txt".format(exp_num), "a")
     details = "     Brain update step: -----------------> \n" \
