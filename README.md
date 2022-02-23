@@ -3,7 +3,7 @@ This repo contains all codes and related documentations for Autonomous Manufactu
 
 
 <p align="center">
-  <img src="autonomous_mfg.gif" />
+  <img width="600" height="600" src="autonomous_mfg.gif" />
 </p>
 
 
