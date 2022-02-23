@@ -7,6 +7,11 @@ This repo contains all codes and related documentations for Autonomous Manufactu
 </p>
 
 
+<p align="center">
+  <img width="600" height="500" src="AMS_concept.gif" />
+</p>
+
+
 
 ## Contributors: 
 Md Ferdous Alam, Sarp Sezer
@@ -19,9 +24,4 @@ Christina Duong
 2. Md Ferdous Alam, Max Shtein, Kira Barton & David J. Hoelzle, “[Autonomous Manufacturing Using Machine Learning: A Computational Case Study With a Limited Manufacturing Budget](https://asmedigitalcollection.asme.org/MSEC/proceedings-abstract/MSEC2020/84263/V002T07A009/1095697),” **([MSEC 2020](https://event.asme.org/MSEC-2020))**. **Best paper award**
 3. Md Ferdous Alam, Max Shtein, Kira Barton & David J. Hoelzle, “[Sample efficient transfer in reinforcement learning for high variable cost environments with inaccurate source reward model](),” **([in review]())**.
 4. Md Ferdous Alam, Max Shtein, Kira Barton & David J. Hoelzle, “[On the use of representation transfer and probabilistic reward modeling for sample efficient decision making in autonomous manufacturing](),” **([in prep]())**.
-
-
-<p align="center">
-  <img width="600" height="500" src="AMS_concept.gif" />
-</p>
 
