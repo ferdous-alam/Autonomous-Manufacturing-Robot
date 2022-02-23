@@ -20,3 +20,8 @@ Christina Duong
 3. Md Ferdous Alam, Max Shtein, Kira Barton & David J. Hoelzle, “[Sample efficient transfer in reinforcement learning for high variable cost environments with inaccurate source reward model](),” **([in review]())**.
 4. Md Ferdous Alam, Max Shtein, Kira Barton & David J. Hoelzle, “[On the use of representation transfer and probabilistic reward modeling for sample efficient decision making in autonomous manufacturing](),” **([in prep]())**.
 
+
+<p align="center">
+  <img width="600" height="500" src="AMS_concept.gif" />
+</p>
+
