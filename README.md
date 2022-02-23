@@ -1,5 +1,8 @@
 # Autonomous-Manufacturing
-This repo contains all codes and related documentations for Autonomous Manufacturing project from HRL lab, MAE, OSU. THe cognitive unit contains all the learning algorithms. 
+This repo contains all codes and related documentations for Autonomous Manufacturing project from HRL lab, MAE, OSU. THe cognitive unit folder contains all the learning algorithms. 
+
+![](autonomous_mfg-of-giphy.gif)
+
 
 
 ## Contributors: 
