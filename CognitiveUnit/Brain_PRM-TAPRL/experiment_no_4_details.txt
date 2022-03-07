@@ -1,0 +1,16 @@
+##### epoch: 0 -----------------------------  
+      TAPRL feedback: ------------> 
+              current state: [1, 6] 
+              artifact to be printed now: [400, 1000] 
+##### epoch: 0 -----------------------------  
+      TAPRL feedback: ------------> 
+              current state: [1, 6] 
+              artifact to be printed now: [400, 1000] 
+##### epoch: 0 -----------------------------  
+      TAPRL feedback: ------------> 
+              current state: [1, 6] 
+              artifact to be printed now: [400, 1000] 
+##### epoch: 0 -----------------------------  
+      TAPRL feedback: ------------> 
+              current state: [1, 6] 
+              artifact to be printed now: [400, 1000] 
