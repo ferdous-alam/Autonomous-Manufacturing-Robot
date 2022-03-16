@@ -23,7 +23,7 @@ def plot_kde_estimate(rewards_cache, rewards_pred, rewards_kde_mean, rewards_kde
         plt.fill_between(x, y_n, alpha=0.5)
 
         # additional properties
-        plt.xlabel(r'$\mathcal{R}(\mathbf{x})$', fontsize=24)
+        plt.xlabel(r'$\mathcal{R}(\mathbf{x})$', fontsize=14)
         plt.rcParams['axes.linewidth'] = 1.25
         plt.xticks(fontsize=14)
         plt.yticks([], fontsize=14)
