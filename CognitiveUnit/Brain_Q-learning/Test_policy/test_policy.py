@@ -38,18 +38,28 @@ def run_learned_policy_feedback(iter_num):
             load the trained Q-table using the original FEM source reward
         """
         all_initial_states = []
+
+        # ------------------------------------
+        #
+        # Check which initial condition
+        #
+        # -------------------------------------
         # get the fixed initial condition for the first iteration
-        initial_state = [1, 2]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
+        # initial condition ---> 1
+        initial_state = [3, 1]
+        # initial condition ---> 2
         # initial_state = [1, 6]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
-        # initial_state = [3, 1]
+        # initial condition ---> 3
+        # initial_state = [1, 2]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
         all_initial_states.append(initial_state)
         np.save('data/all_initial_states.npy', all_initial_states)  # save initial state info
+        # ----------------------------------------
 
     all_initial_states = np.load('data/all_initial_states.npy')
     all_initial_states = all_initial_states.tolist()   # save as a list for appending
     state = all_initial_states[-1]
 
-    Q_table = np.load('Test_policy/Q_table_trained.npy')  # save in a different name to overwrite later
+    Q_table = np.load('Test_policy/Q_table_trained_E2_T1.npy')  # save in a different name to overwrite later
 
     # get optimal action from the optimal policy
     env = PnCMfg('source', R_source)

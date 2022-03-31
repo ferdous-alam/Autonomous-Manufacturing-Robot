@@ -1,0 +1,350 @@
+iteration number: 1.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [1, 2], 
+          action_taken: [1, 1], 
+         next_state: [2, 3], 
+         artifact_to_be_printed_now: [400, 800] micro meters
+         artifact_to_be_printed_next: [450, 850] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.29554132020974
+ ------------------------------------------------------- 
+
+iteration number: 2.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 3], 
+          action_taken: [0, 1], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 850] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.25478453399565
+ ------------------------------------------------------- 
+
+iteration number: 3.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.15947432516931
+ ------------------------------------------------------- 
+
+iteration number: 4.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.33655335043541
+ ------------------------------------------------------- 
+
+iteration number: 5.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.21363510690836
+ ------------------------------------------------------- 
+
+iteration number: 6.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.27463277474489
+ ------------------------------------------------------- 
+
+iteration number: 7.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.26107817099104
+ ------------------------------------------------------- 
+
+iteration number: 8.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.24813987772116
+ ------------------------------------------------------- 
+
+iteration number: 9.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.21959454595248
+ ------------------------------------------------------- 
+
+iteration number: 10.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.31310368467956
+ ------------------------------------------------------- 
+
+iteration number: 11.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.213043542843
+ ------------------------------------------------------- 
+
+iteration number: 12.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.14414306293484
+ ------------------------------------------------------- 
+
+iteration number: 13.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.2024459003701
+ ------------------------------------------------------- 
+
+iteration number: 14.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.18480761904909
+ ------------------------------------------------------- 
+
+iteration number: 15.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.23204950128208
+ ------------------------------------------------------- 
+
+iteration number: 16.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.17108743335532
+ ------------------------------------------------------- 
+
+iteration number: 17.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.32973820452508
+ ------------------------------------------------------- 
+
+iteration number: 18.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.23425234270635
+ ------------------------------------------------------- 
+
+iteration number: 19.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.25360930563206
+ ------------------------------------------------------- 
+
+iteration number: 20.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.18593010443478
+ ------------------------------------------------------- 
+
+iteration number: 21.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.18542514044633
+ ------------------------------------------------------- 
+
+iteration number: 22.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.19316726246898
+ ------------------------------------------------------- 
+
+iteration number: 23.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.2319581844209
+ ------------------------------------------------------- 
+
+iteration number: 24.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 7.36022519947719
+ ------------------------------------------------------- 
+
+iteration number: 24.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [2, 4], 
+          action_taken: [0, 0], 
+         next_state: [2, 4], 
+         artifact_to_be_printed_now: [450, 900] micro meters
+         artifact_to_be_printed_next: [450, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         No update required: offline execution of source optimal policy 
+          reward: 9.14708233867582
+ ------------------------------------------------------- 
+

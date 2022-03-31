@@ -1,0 +1,423 @@
+iteration number: 1.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [3, 1], 
+         action_taken: [1, 0], 
+         next_state: [4, 1], 
+         artifact_to_be_printed_now: [500, 750] micro meters
+         artifact_to_be_printed_next: [550, 750] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.773687991318526
+         trajectory:---> s_t: [500, 750], a_t: [1, 0], r: [550, 750], s_t+1: 0.773687991318526 
+         Q[s_t, a_t] before update: [0. 0. 0. 0. 0. 0. 0. 0. 0.]
+         Q[s_t, a_t] after update: [0.       0.       0.       0.386844 0.       0.       0.       0.
+ 0.      ]
+ ------------------------------------------------------- 
+
+iteration number: 2.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [4, 1], 
+         action_taken: [0, 1], 
+         next_state: [4, 2], 
+         artifact_to_be_printed_now: [550, 750] micro meters
+         artifact_to_be_printed_next: [550, 800] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.633170928922791
+         trajectory:---> s_t: [550, 750], a_t: [0, 1], r: [550, 800], s_t+1: 0.633170928922791 
+         Q[s_t, a_t] before update: [0. 0. 0. 0. 0. 0. 0. 0. 0.]
+         Q[s_t, a_t] after update: [0.31658546 0.         0.         0.         0.         0.
+ 0.         0.         0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 3.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [4, 2], 
+         action_taken: [0, 1], 
+         next_state: [4, 3], 
+         artifact_to_be_printed_now: [550, 800] micro meters
+         artifact_to_be_printed_next: [550, 850] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.0817352026782623
+         trajectory:---> s_t: [550, 800], a_t: [0, 1], r: [550, 850], s_t+1: 0.0817352026782623 
+         Q[s_t, a_t] before update: [0. 0. 0. 0. 0. 0. 0. 0. 0.]
+         Q[s_t, a_t] after update: [0.0408676 0.        0.        0.        0.        0.        0.
+ 0.        0.       ]
+ ------------------------------------------------------- 
+
+iteration number: 4.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [4, 3], 
+         action_taken: [0, 1], 
+         next_state: [4, 4], 
+         artifact_to_be_printed_now: [550, 850] micro meters
+         artifact_to_be_printed_next: [550, 900] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.279021859050056
+         trajectory:---> s_t: [550, 850], a_t: [0, 1], r: [550, 900], s_t+1: 0.279021859050056 
+         Q[s_t, a_t] before update: [0. 0. 0. 0. 0. 0. 0. 0. 0.]
+         Q[s_t, a_t] after update: [0.13951093 0.         0.         0.         0.         0.
+ 0.         0.         0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 5.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [4, 4], 
+         action_taken: [0, 1], 
+         next_state: [4, 5], 
+         artifact_to_be_printed_now: [550, 900] micro meters
+         artifact_to_be_printed_next: [550, 950] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: -0.127218251823779
+         trajectory:---> s_t: [550, 900], a_t: [0, 1], r: [550, 950], s_t+1: -0.127218251823779 
+         Q[s_t, a_t] before update: [0. 0. 0. 0. 0. 0. 0. 0. 0.]
+         Q[s_t, a_t] after update: [-0.06360913  0.          0.          0.          0.          0.
+  0.          0.          0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 6.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [4, 5], 
+         action_taken: [0, 1], 
+         next_state: [4, 6], 
+         artifact_to_be_printed_now: [550, 950] micro meters
+         artifact_to_be_printed_next: [550, 1000] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.149818742510025
+         trajectory:---> s_t: [550, 950], a_t: [0, 1], r: [550, 1000], s_t+1: 0.149818742510025 
+         Q[s_t, a_t] before update: [0. 0. 0. 0. 0. 0. 0. 0. 0.]
+         Q[s_t, a_t] after update: [0.07490937 0.         0.         0.         0.         0.
+ 0.         0.         0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 7.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [4, 6], 
+         action_taken: [0, 1], 
+         next_state: [4, 7], 
+         artifact_to_be_printed_now: [550, 1000] micro meters
+         artifact_to_be_printed_next: [550, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: -2.30580002036961
+         trajectory:---> s_t: [550, 1000], a_t: [0, 1], r: [550, 1050], s_t+1: -2.30580002036961 
+         Q[s_t, a_t] before update: [0. 0. 0. 0. 0. 0. 0. 0. 0.]
+         Q[s_t, a_t] after update: [-1.15290001  0.          0.          0.          0.          0.
+  0.          0.          0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 8.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [4, 7], 
+         action_taken: [0, 1], 
+         next_state: [4, 7], 
+         artifact_to_be_printed_now: [550, 1050] micro meters
+         artifact_to_be_printed_next: [550, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: -1.58092698307044
+         trajectory:---> s_t: [550, 1050], a_t: [0, 1], r: [550, 1050], s_t+1: -1.58092698307044 
+         Q[s_t, a_t] before update: [0. 0. 0. 0. 0. 0. 0. 0. 0.]
+         Q[s_t, a_t] after update: [-0.79046349  0.          0.          0.          0.          0.
+  0.          0.          0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 9.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [4, 7], 
+         action_taken: [0, -1], 
+         next_state: [4, 6], 
+         artifact_to_be_printed_now: [550, 1050] micro meters
+         artifact_to_be_printed_next: [550, 1000] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: -1.11209266692583
+         trajectory:---> s_t: [550, 1050], a_t: [0, -1], r: [550, 1000], s_t+1: -1.11209266692583 
+         Q[s_t, a_t] before update: [-0.79046349  0.          0.          0.          0.          0.
+  0.          0.          0.        ]
+         Q[s_t, a_t] after update: [-0.79046349 -0.55604633  0.          0.          0.          0.
+  0.          0.          0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 10.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [4, 6], 
+         action_taken: [-1, 1], 
+         next_state: [3, 7], 
+         artifact_to_be_printed_now: [550, 1000] micro meters
+         artifact_to_be_printed_next: [500, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: -0.755715444840304
+         trajectory:---> s_t: [550, 1000], a_t: [-1, 1], r: [500, 1050], s_t+1: -0.755715444840304 
+         Q[s_t, a_t] before update: [-1.15290001  0.          0.          0.          0.          0.
+  0.          0.          0.        ]
+         Q[s_t, a_t] after update: [-1.15290001  0.          0.          0.          0.         -0.37785772
+  0.          0.          0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 11.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [3, 7], 
+         action_taken: [0, 1], 
+         next_state: [3, 7], 
+         artifact_to_be_printed_now: [500, 1050] micro meters
+         artifact_to_be_printed_next: [500, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.562563859656424
+         trajectory:---> s_t: [500, 1050], a_t: [0, 1], r: [500, 1050], s_t+1: 0.562563859656424 
+         Q[s_t, a_t] before update: [0. 0. 0. 0. 0. 0. 0. 0. 0.]
+         Q[s_t, a_t] after update: [0.28128193 0.         0.         0.         0.         0.
+ 0.         0.         0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 12.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [3, 7], 
+         action_taken: [0, 1], 
+         next_state: [3, 7], 
+         artifact_to_be_printed_now: [500, 1050] micro meters
+         artifact_to_be_printed_next: [500, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.32321429031152
+         trajectory:---> s_t: [500, 1050], a_t: [0, 1], r: [500, 1050], s_t+1: 0.32321429031152 
+         Q[s_t, a_t] before update: [0.28128193 0.         0.         0.         0.         0.
+ 0.         0.         0.        ]
+         Q[s_t, a_t] after update: [0.44148267 0.         0.         0.         0.         0.
+ 0.         0.         0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 13.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [3, 7], 
+         action_taken: [0, 1], 
+         next_state: [3, 7], 
+         artifact_to_be_printed_now: [500, 1050] micro meters
+         artifact_to_be_printed_next: [500, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.117723301947637
+         trajectory:---> s_t: [500, 1050], a_t: [0, 1], r: [500, 1050], s_t+1: 0.117723301947637 
+         Q[s_t, a_t] before update: [0.44148267 0.         0.         0.         0.         0.
+ 0.         0.         0.        ]
+         Q[s_t, a_t] after update: [0.4981369 0.        0.        0.        0.        0.        0.
+ 0.        0.       ]
+ ------------------------------------------------------- 
+
+iteration number: 14.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [3, 7], 
+         action_taken: [0, 1], 
+         next_state: [3, 7], 
+         artifact_to_be_printed_now: [500, 1050] micro meters
+         artifact_to_be_printed_next: [500, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.572095168218563
+         trajectory:---> s_t: [500, 1050], a_t: [0, 1], r: [500, 1050], s_t+1: 0.572095168218563 
+         Q[s_t, a_t] before update: [0.4981369 0.        0.        0.        0.        0.        0.
+ 0.        0.       ]
+         Q[s_t, a_t] after update: [0.7816938 0.        0.        0.        0.        0.        0.
+ 0.        0.       ]
+ ------------------------------------------------------- 
+
+iteration number: 15.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [3, 7], 
+         action_taken: [1, 0], 
+         next_state: [4, 7], 
+         artifact_to_be_printed_now: [500, 1050] micro meters
+         artifact_to_be_printed_next: [550, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.543440263662742
+         trajectory:---> s_t: [500, 1050], a_t: [1, 0], r: [550, 1050], s_t+1: 0.543440263662742 
+         Q[s_t, a_t] before update: [0.7816938 0.        0.        0.        0.        0.        0.
+ 0.        0.       ]
+         Q[s_t, a_t] after update: [0.7816938  0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 16.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [4, 7], 
+         action_taken: [-1, 0], 
+         next_state: [3, 7], 
+         artifact_to_be_printed_now: [550, 1050] micro meters
+         artifact_to_be_printed_next: [500, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: -1.79519451754904
+         trajectory:---> s_t: [550, 1050], a_t: [-1, 0], r: [500, 1050], s_t+1: -1.79519451754904 
+         Q[s_t, a_t] before update: [-0.79046349 -0.55604633  0.          0.          0.          0.
+  0.          0.          0.        ]
+         Q[s_t, a_t] after update: [-0.79046349 -0.55604633 -0.51065883  0.          0.          0.
+  0.          0.          0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 17.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [3, 7], 
+         action_taken: [0, 1], 
+         next_state: [3, 7], 
+         artifact_to_be_printed_now: [500, 1050] micro meters
+         artifact_to_be_printed_next: [500, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.375536723649149
+         trajectory:---> s_t: [500, 1050], a_t: [0, 1], r: [500, 1050], s_t+1: 0.375536723649149 
+         Q[s_t, a_t] before update: [0.7816938  0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+         Q[s_t, a_t] after update: [0.9655537  0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 18.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [3, 7], 
+         action_taken: [0, 1], 
+         next_state: [3, 7], 
+         artifact_to_be_printed_now: [500, 1050] micro meters
+         artifact_to_be_printed_next: [500, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.241222197666947
+         trajectory:---> s_t: [500, 1050], a_t: [0, 1], r: [500, 1050], s_t+1: 0.241222197666947 
+         Q[s_t, a_t] before update: [0.9655537  0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+         Q[s_t, a_t] after update: [1.08133703 0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 19.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [3, 7], 
+         action_taken: [0, 1], 
+         next_state: [3, 7], 
+         artifact_to_be_printed_now: [500, 1050] micro meters
+         artifact_to_be_printed_next: [500, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.248341625742065
+         trajectory:---> s_t: [500, 1050], a_t: [0, 1], r: [500, 1050], s_t+1: 0.248341625742065 
+         Q[s_t, a_t] before update: [1.08133703 0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+         Q[s_t, a_t] after update: [1.20010115 0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 20.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [3, 7], 
+         action_taken: [0, 1], 
+         next_state: [3, 7], 
+         artifact_to_be_printed_now: [500, 1050] micro meters
+         artifact_to_be_printed_next: [500, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.272168776788113
+         trajectory:---> s_t: [500, 1050], a_t: [0, 1], r: [500, 1050], s_t+1: 0.272168776788113 
+         Q[s_t, a_t] before update: [1.20010115 0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+         Q[s_t, a_t] after update: [1.33018504 0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 21.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [3, 7], 
+         action_taken: [0, 1], 
+         next_state: [3, 7], 
+         artifact_to_be_printed_now: [500, 1050] micro meters
+         artifact_to_be_printed_next: [500, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.18171060223874
+         trajectory:---> s_t: [500, 1050], a_t: [0, 1], r: [500, 1050], s_t+1: 0.18171060223874 
+         Q[s_t, a_t] before update: [1.33018504 0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+         Q[s_t, a_t] after update: [1.41438941 0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 22.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [3, 7], 
+         action_taken: [0, 1], 
+         next_state: [3, 7], 
+         artifact_to_be_printed_now: [500, 1050] micro meters
+         artifact_to_be_printed_next: [500, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.432003091217883
+         trajectory:---> s_t: [500, 1050], a_t: [0, 1], r: [500, 1050], s_t+1: 0.432003091217883 
+         Q[s_t, a_t] before update: [1.41438941 0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+         Q[s_t, a_t] after update: [1.62331901 0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 23.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [3, 7], 
+         action_taken: [0, 1], 
+         next_state: [3, 7], 
+         artifact_to_be_printed_now: [500, 1050] micro meters
+         artifact_to_be_printed_next: [500, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.134948005636375
+         trajectory:---> s_t: [500, 1050], a_t: [0, 1], r: [500, 1050], s_t+1: 0.134948005636375 
+         Q[s_t, a_t] before update: [1.62331901 0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+         Q[s_t, a_t] after update: [1.68267642 0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+ ------------------------------------------------------- 
+
+iteration number: 24.0 ########################## 
+     Artifact printing step: -----------------> 
+         current_state: [3, 7], 
+         action_taken: [0, 1], 
+         next_state: [3, 7], 
+         artifact_to_be_printed_now: [500, 1050] micro meters
+         artifact_to_be_printed_next: [500, 1050] micro meters
+
+
+     Brain update step: -----------------> 
+         reward: 0.454786259347871
+         trajectory:---> s_t: [500, 1050], a_t: [0, 1], r: [500, 1050], s_t+1: 0.454786259347871 
+         Q[s_t, a_t] before update: [1.68267642 0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+         Q[s_t, a_t] after update: [1.90165617 0.         0.         0.27172013 0.         0.
+ 0.         0.         0.        ]
+ ------------------------------------------------------- 
+
