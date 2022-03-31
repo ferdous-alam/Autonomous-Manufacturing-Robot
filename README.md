@@ -7,6 +7,12 @@ This repo contains all codes and related documentations for Autonomous Manufactu
 </p>
 
 
+<p align="center">
+  <img width="400" height="400" src="feature_visualization.png" />
+</p>
+
+
+
 ## Contributors: 
 Md Ferdous Alam, Sarp Sezer
 
