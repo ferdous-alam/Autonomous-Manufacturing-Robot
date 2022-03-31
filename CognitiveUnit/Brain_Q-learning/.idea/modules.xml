@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../Brain_Q-learning/.idea/Brain_Q-learning.iml" filepath="$PROJECT_DIR$/../Brain_Q-learning/.idea/Brain_Q-learning.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Brain_Q-learning.iml" filepath="$PROJECT_DIR$/.idea/Brain_Q-learning.iml" />
     </modules>
   </component>
 </project>

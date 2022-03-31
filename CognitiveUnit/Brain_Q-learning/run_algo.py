@@ -1,4 +1,5 @@
 from algorithm import algo
+from Test_policy import test_policy
 
 # ----- author details ------------------
 __author__ = "Md Ferdous Alam, HRL, MAE, OSU"
@@ -16,7 +17,8 @@ def run_algo(iter_num):
     # policy from vanilla Q-learning (Brain_Q-learning)
 
     # run Brain_PRM-TAPRL algorithm
-    indices = algo.run_Q_learning_feedback(iter_num)
+    # indices = algo.run_Q_learning_feedback(iter_num)   # when training the agent
+    indices = test_policy.run_learned_policy_feedback(iter_num)     # when testing the learned policy
 
     return indices
 
@@ -28,13 +30,14 @@ def run_update(iter_num):
     # Offline execution of source optimal policy (Brain_PRM-TAPRL)
 
     # run Brain_PRM-TAPRL algorithm
-    algo.run_Q_learning_update(iter_num)
+    # algo.run_Q_learning_update(iter_num)   # when training the agent
+    test_policy.run_learned_policy_update(iter_num)       # when testing the learned policy
 
     return None
 
 
 if __name__ == "__main__":
-    for i in range(3):
+    for i in range(5):
         val = run_algo(i)
         print(val)
         run_update(i)

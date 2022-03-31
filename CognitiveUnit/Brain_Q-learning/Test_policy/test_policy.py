@@ -6,7 +6,7 @@ from lib.get_policy import get_policy
 from visualizations import visualize_samples as vo
 
 
-def run_Q_learning_feedback(iter_num):
+def run_learned_policy_feedback(iter_num):
     """
 
     :param iter_num:
@@ -22,7 +22,7 @@ def run_Q_learning_feedback(iter_num):
     R_source = R_source.T
 
     # exploration factor
-    epsilon = 0.10
+    epsilon = 0.0
 
     if iter_num == 0:
         """
@@ -39,19 +39,17 @@ def run_Q_learning_feedback(iter_num):
         """
         all_initial_states = []
         # get the fixed initial condition for the first iteration
-        # initial_state = [1, 2]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
+        initial_state = [1, 2]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
         # initial_state = [1, 6]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
-        initial_state = [3, 1]
+        # initial_state = [3, 1]
         all_initial_states.append(initial_state)
-        Q_table = np.load('data/Q_trained_source.npy')
-        np.save('data/Q_table_trained.npy', Q_table)  # save in a different name to overwrite later
         np.save('data/all_initial_states.npy', all_initial_states)  # save initial state info
 
     all_initial_states = np.load('data/all_initial_states.npy')
     all_initial_states = all_initial_states.tolist()   # save as a list for appending
     state = all_initial_states[-1]
 
-    Q_table = np.load('data/Q_table_trained.npy')  # save in a different name to overwrite later
+    Q_table = np.load('Test_policy/Q_table_trained.npy')  # save in a different name to overwrite later
 
     # get optimal action from the optimal policy
     env = PnCMfg('source', R_source)
@@ -89,16 +87,8 @@ def run_Q_learning_feedback(iter_num):
     return artifact_to_be_printed
 
 
-def run_Q_learning_update(iter_num):
+def run_learned_policy_update(iter_num):
     exp_num = 2  # DO NOT CHANGE, THIS IS FIXED!!
-
-    # Algo parameters
-    alpha = 0.5
-    gamma = 0.99
-
-    # 9 possible actions to choose from
-    actions = [[0, 1], [0, -1], [-1, 0], [1, 0], [1, 1],
-               [-1, 1], [-1, -1], [1, -1], [0, 0]]
 
     # load real-time reward csv file
     reward = get_reward_from_AMSPnC_data(iter_num)
@@ -109,35 +99,11 @@ def run_Q_learning_update(iter_num):
     current_state, action, next_state = current_trajectory
     trajectory_info = [current_state, action, next_state, reward]
     action = action.tolist()
-    action_idx = actions.index(action)
-    # load Q-table
-    if iter_num == 0:
-        Q_table = np.zeros((6, 8, len(actions)))
-        np.save('data/Q_table_trained.npy', Q_table)
-    else:
-        Q_table = np.load('data/Q_table_trained.npy')
 
     # save trajectory history for post-processing
     with open('data/trajectory_history.csv', 'a', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=' ')
         writer.writerow(trajectory_info)
-
-    # identify next best action
-    next_best_action_idx = np.argmax(Q_table[next_state[0], next_state[1], :])
-
-    # keep track of Q-value before update
-    Q_vals_before = np.copy(Q_table[current_state[0], current_state[1], :])
-
-    # update Q-table
-    Q_table[current_state[0], current_state[1], action_idx] += \
-        alpha * (
-                reward + gamma * Q_table[next_state[0],
-                                         next_state[1],
-                                         next_best_action_idx] - Q_table[
-            current_state[0], current_state[1], action_idx])
-
-    # keep track of Q-value after update
-    Q_vals_after = Q_table[current_state[0], current_state[1], :]
 
     # update dump file with relevant information --->
     lxy = np.arange(700, 1100, 50)
@@ -145,17 +111,12 @@ def run_Q_learning_update(iter_num):
     current_state_dimensions = [dia[current_state[0]], lxy[current_state[1]]]
     next_state_dimensions = [dia[next_state[0]], lxy[next_state[1]]]
 
-    np.save('data/Q_table_trained.npy', Q_table)  # save Q-table
-
     log_file = open("dump/experiment_no_{}_details.txt".format(exp_num), "a")
     details = "     Brain update step: -----------------> \n" \
               "         reward: {}\n" \
               "         trajectory:---> s_t: {}, a_t: {}, r: {}, s_t+1: {} \n" \
-              "         Q[s_t, a_t] before update: {}\n " \
-              "        Q[s_t, a_t] after update: {}\n" \
               " ------------------------------------------------------- ".format(
-              reward, current_state_dimensions, action, next_state_dimensions,
-        reward, Q_vals_before, Q_vals_after) + "\n" + "\n"\
+                reward, current_state_dimensions, action, reward, next_state_dimensions) + "\n" + "\n"\
 
     log_file.write(details)
     log_file.close()
