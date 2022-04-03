@@ -1,13 +1,18 @@
 import numpy as np
+import csv
 from environment.PnCMfg import PnCMfg
+from lib.get_policy import get_policy
+from lib.indices_to_artifact_dims import indices_to_artifact_dims
+from visualizations import visualize_samples as vo
+from lib.get_reward_from_AMSPnC_data import get_reward_from_AMSPnC_data
+from lib.get_reward_from_AMSPnC_data import extract_rewards
 
 
 class CreateOptions:
-    def __init__(self, state_init, H, epsilon, num_of_options):
+    def __init__(self, state_init, H, trial_num=None):
         self.state_init = state_init
         self.H = H   # horizon length
-        self.epsilon = epsilon
-        self.num_of_options = num_of_options
+        self.trial_num = trial_num
         # action space
         self.actions = [[0, 1], [0, -1], [-1, 0], [1, 0], [1, 1],
                         [-1, 1], [-1, -1], [1, -1], [0, 0]]
@@ -15,7 +20,12 @@ class CreateOptions:
         # load trained Q-table and source reward function
         R_s = np.load('data/source_reward.npy')
         self.R_source = R_s.T
-        self.Q_table = np.load('data/Q_table.npy')
+        if self.trial_num == 1:
+            self.Q_table = np.load('Test_policy/Q_table_trained_E3_T1.npy')
+        elif self.trial_num == 2:
+            self.Q_table = np.load('Test_policy/Q_table_trained_E3_T2.npy')
+        else:
+            self.Q_table = np.load('Test_policy/Q_table_trained_E3_T3.npy')
         # instantiate environment
         self.env = PnCMfg('source', self.R_source)
 
@@ -28,10 +38,7 @@ class CreateOptions:
 
         for i in range(Delta):
             rand_num = np.random.rand()
-            if rand_num <= self.epsilon:
-                action_idx = np.random.choice(9)
-            else:
-                action_idx = np.argmax(self.Q_table[state[0], state[1], :])
+            action_idx = np.argmax(self.Q_table[state[0], state[1], :])
             action = self.actions[action_idx]
             next_state, reward = self.env.step(state, action)
             # append to the option
@@ -64,47 +71,17 @@ class CreateOptions:
 
         return option, option_states, option_rewards
 
-    def get_subgoal(self):
-        option, option_states, option_rewards = self.greedy_option(self.H)
-        max_reward_idx = option_rewards.index(max(option_rewards))
-        subgoal = option_states[max_reward_idx]
-        Delta = max_reward_idx + 1
-        return subgoal, Delta
-
     def create_options(self):
-        # identify subgoal state
-        subgoal, Delta = self.get_subgoal()
-        # initialization
-        options_set = {}
-        options_rewards_set = {}
-        options_states_set = {}
+        option, option_states, option_rewards = self.greedy_option(self.H)
 
-        # get greedy option and append as the first element of the options set
-        option_g, option_states_g, option_rewards_g = self.greedy_option(Delta)
-        options_set[0] = option_g
-        options_rewards_set[0] = option_rewards_g
-        options_states_set[0] = option_states_g
-
-        for i in range(self.num_of_options - 1):
-            option, option_rewards,  option_states = self.create_option(Delta)
-            options_set[i+1] = option
-            options_rewards_set[i+1] = option_rewards
-            options_states_set[i+1] = option_states
-
-        # convert dictionaries to list
-        options = [options_set[i] for i in range(len(options_set))]
-        options_rewards = [options_rewards_set[i] for i in range(len(options_rewards_set))]
-        options_states = [options_states_set[i] for i in range(len(options_states_set))]
-
-        return options, options_rewards, options_states
+        return option, option_states, option_rewards
 
 
 if __name__ == "__main__":
-    create_options = CreateOptions([3, 1], 3, 0, 1)
-    options_set, options_rewards_set, options_states_set = create_options.create_options()
-    print(options_set)
-    # # viz
-    # plot_options(options_states_set)
+    create_options = CreateOptions([2, 5], 3, exp_num=2)
+    option, option_states, option_rewards = create_options.create_options()
+    print(option_states)
+
 
 
 
