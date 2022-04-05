@@ -18,7 +18,7 @@ def run_algo(iter_num):
 
     # run Brain_PRM-TAPRL algorithm
     # indices = algo.run_PRM_TAPRL_feedback(iter_num)  # when training the agent
-    indices = test_policy.run_learned_policy_feedback(iter_num, trial_num=2)  # when testing the learned policy
+    indices = test_policy.run_learned_policy_feedback(iter_num, trial_num=1)  # when testing the learned policy
 
     return indices
 
@@ -31,7 +31,7 @@ def run_update(iter_num):
 
     # run TAPRL algorithm
     # algo.run_PRM_TAPRL_update(iter_num)    # when training the agent
-    test_policy.run_learned_policy_update(iter_num, trial_num=2)  # when testing the learned policy
+    test_policy.run_learned_policy_update(iter_num, trial_num=1)  # when testing the learned policy
 
     return None
 

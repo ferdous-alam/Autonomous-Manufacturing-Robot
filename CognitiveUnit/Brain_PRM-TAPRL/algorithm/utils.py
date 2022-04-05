@@ -18,8 +18,7 @@ def value_iteration(reward_model):
         value_func: optimal value function from value iteration
     """
 
-    R_s = np.load('data/source_reward.npy')
-    R_s = R_s.T
+    R_s = reward_model.T
     # instantiate environment with given reward model
     env = PnCMfg('source', R_s)
 

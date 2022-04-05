@@ -2,7 +2,7 @@ import numpy as np
 import csv
 from environment.PnCMfg import PnCMfg
 from lib.get_reward_from_AMSPnC_data import get_reward_from_AMSPnC_data
-from Test_policy.get_action import get_action
+from Test_policy.get_option import *
 from visualizations import visualize_samples as vo
 
 
@@ -35,10 +35,10 @@ def run_learned_policy_feedback(iter_num, trial_num):
         # get the fixed initial condition for the first iteration
         if trial_num == 1:
             # initial condition ---> 1
-            initial_state = [3, 1]
+            initial_state = [1, 6]
         elif trial_num == 2:
             # initial condition ---> 2
-            initial_state = [1, 6]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
+            initial_state = [3, 1]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
         else:
             # initial condition ---> 3
             initial_state = [1, 2]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
@@ -54,10 +54,10 @@ def run_learned_policy_feedback(iter_num, trial_num):
     R_source = np.load('data/source_reward.npy')
     R_source = R_source.T
     env = PnCMfg('source', R_source)
-    action = get_action(trial_num, state)
-    next_state, _ = env.step(state, action)   # reward is simulated, so ignored, later actual reward will be updated
+    option = get_option(trial_num, state)
+    next_state = execute_option(env, state, option)
     all_initial_states.append(next_state)
-    current_trajectory = [state, action, next_state]
+    current_trajectory = [state, option, next_state]
     np.save('data/current_trajectory.npy', current_trajectory)  # save initial state info
     np.save('data/all_initial_states.npy', all_initial_states)  # save initial state info
     states = all_initial_states
@@ -73,11 +73,11 @@ def run_learned_policy_feedback(iter_num, trial_num):
     details = "iteration number: {} ########################## \n"\
               "     Artifact printing step: -----------------> \n"\
               "         current_state: {}, \n "\
-              "        action_taken: {}, \n"\
+              "        option_taken: {}, \n"\
               "         next_state: {}, \n"\
               "         artifact_to_be_printed_now: {} micro meters\n" \
               "         artifact_to_be_printed_next: {} micro meters\n".format(
-                iter_num + 1, state, action, next_state,
+                iter_num + 1, state, option, next_state,
                 artifact_dimension_prev, artifact_dimension_next) + "\n" + "\n"
     log_file.write(details)
     log_file.close()
@@ -95,11 +95,11 @@ def run_learned_policy_update(iter_num, trial_num):
     reward = get_reward_from_AMSPnC_data(iter_num)
 
     # load current trajectory and extract state, action, next state info
-    current_trajectory = np.load('data/current_trajectory.npy')
+    current_trajectory = np.load('data/current_trajectory.npy',
+                                 allow_pickle=True)
 
-    current_state, action, next_state = current_trajectory
-    trajectory_info = [current_state, action, next_state, reward]
-    action = action.tolist()
+    current_state, option, next_state = current_trajectory
+    trajectory_info = [current_state, option, next_state, reward]
 
     # save trajectory history for post-processing
     with open('data/trajectory_history.csv', 'a', newline='') as csvfile:
@@ -115,9 +115,9 @@ def run_learned_policy_update(iter_num, trial_num):
     log_file = open("dump/experiment_no_{}_{}_details.txt".format(exp_num, trial_num), "a")
     details = "     Brain update step: -----------------> \n" \
               "         reward: {}\n" \
-              "         trajectory:---> s_t: {}, a_t: {}, r: {}, s_t+1: {} \n" \
+              "         trajectory:---> s_t: {}, o_t: {}, r: {}, s_t+1: {} \n" \
               " ------------------------------------------------------- ".format(
-                reward, current_state_dimensions, action, reward, next_state_dimensions) + "\n" + "\n"\
+                reward, current_state_dimensions, option, reward, next_state_dimensions) + "\n" + "\n"\
 
     log_file.write(details)
     log_file.close()
