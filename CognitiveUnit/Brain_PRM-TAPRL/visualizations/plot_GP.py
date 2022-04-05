@@ -35,7 +35,7 @@ def plotGPmean(X1, X2, gpMean,  iter_num, gpStd=None, save_plot=False):
         # save plot as pdf
         plt.savefig(f'figures/plot_gp_mean_{iter_num}.pdf', format='pdf', bbox_inches='tight', dpi=300)
 
-    # plt.show()
+    plt.show()
 
 
 

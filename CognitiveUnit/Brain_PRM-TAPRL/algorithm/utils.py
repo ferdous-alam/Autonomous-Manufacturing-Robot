@@ -87,7 +87,7 @@ def get_optimal_policy(func_type, value_func, policy_length, start_state):
 
     # instantiate environment
     # instantiate environment
-    R_source = np.load('../data/source_reward.npy')
+    R_source = np.load('data/source_reward.npy')
     R_source = R_source.T
     env = PnCMfg('source', R_source)
     # reward is a dummy input as it is not important to find the optimal policy
