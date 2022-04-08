@@ -16,7 +16,8 @@ def run_algo(iter_num):
     # Offline execution of source optimal policy (Brain_PRM-TAPRL)
 
     # run Brain_PRM-TAPRL algorithm
-    indices = algo.run_offline_feedback(iter_num)
+    trial_num = 1   # trail number, starting position fixed according to this
+    indices = algo.run_offline_feedback(iter_num, trial_num)
 
     return indices
 
@@ -28,14 +29,15 @@ def run_update(iter_num):
     # Offline execution of source optimal policy (Brain_PRM-TAPRL)
 
     # run Brain_PRM-TAPRL algorithm
-    algo.run_offline_update(iter_num)
+    trial_num = 1  # trail number, starting position fixed according to this
+    algo.run_offline_update(iter_num, trial_num)
 
     return None
 
-#
-# if __name__ == "__main__":
-#     for i in range(5):
-#         val = run_algo(i)
-#         print(val)
-#         run_update(i)
+
+if __name__ == "__main__":
+    for i in range(5):
+        val = run_algo(i)
+        print(val)
+        run_update(i)
 

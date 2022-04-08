@@ -1,25 +1,20 @@
 import numpy as np
-import csv
 from environment.PnCMfg import PnCMfg
+from lib.utils import *
 from lib.get_reward_from_AMSPnC_data import get_reward_from_AMSPnC_data
 from lib.get_optimal_policy import get_optimal_policy
 from visualizations import visualize_samples as vo
 
 
-def run_offline_feedback(iter_num):
-    """
-
-    :param iter_num:
-    :return:
-    """
+def run_offline_feedback(iter_num, trial_num):
 
     # append to log file for experiment details
     exp_num = 1  # DO NOT CHANGE, this is fixed!!!
-    log_file = open("dump/experiment_no_{}_details.txt".format(exp_num), "a")
+    log_file = open("dump/experiment_no_{}_{}_details.txt".format(exp_num, trial_num), "a")
 
     # load trained Q-table and source reward function
     R_source = np.load('data/source_reward.npy')
-    R_source = R_source.T
+    R_source_reshaped = R_source.T
     Q_table = np.load('data/Q_trained_source.npy')
 
     if iter_num == 0:
@@ -37,7 +32,13 @@ def run_offline_feedback(iter_num):
         """
         all_initial_states = []
         # get the fixed initial condition for the first iteration
-        initial_state = [1, 2]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
+        if trial_num == 1:
+            initial_state = [1, 6]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
+        elif trial_num == 2:
+            initial_state = [3, 1]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
+        else:
+            initial_state = [1, 2]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
+
         all_initial_states.append(initial_state)
         np.save('data/all_initial_states.npy', all_initial_states)  # save initial state info
 
@@ -46,8 +47,10 @@ def run_offline_feedback(iter_num):
     state = all_initial_states[-1]
 
     # get optimal action from the optimal policy
-    env = PnCMfg('source', R_source)
-    opt_action = get_optimal_policy(Q_table, state)
+    env = PnCMfg('source', R_source_reshaped)
+    opt_value_func = value_iteration(R_source)   # perform value iteration
+    opt_policy = get_value_optimal_policy("value_func", opt_value_func, 5, state)  # find optimal policy
+    opt_action = opt_policy[0]   # only execute first action
     next_state, _ = env.step(state, opt_action)
     all_initial_states.append(next_state)
     np.save('data/all_initial_states.npy', all_initial_states)  # save initial state info
@@ -79,15 +82,13 @@ def run_offline_feedback(iter_num):
     return artifact_to_be_printed
 
 
-def run_offline_update(iter_num):
+def run_offline_update(iter_num, trial_num):
     exp_num = 1  # DO NOT CHANGE, THIS IS FIXED!!
 
     # load real-time reward csv file
     reward = get_reward_from_AMSPnC_data(iter_num)
 
-    print(reward)
-
-    log_file = open("dump/experiment_no_{}_details.txt".format(exp_num), "a")
+    log_file = open("dump/experiment_no_{}_{}_details.txt".format(exp_num, trial_num), "a")
     details = "     Brain update step: -----------------> \n"\
               "         No update required: offline execution of source optimal policy \n " \
               "         reward: {}\n" \
