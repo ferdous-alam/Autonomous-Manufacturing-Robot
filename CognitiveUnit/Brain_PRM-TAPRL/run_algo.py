@@ -17,8 +17,8 @@ def run_algo(iter_num):
     # PRM-TAPRL algorithm
 
     # run Brain_PRM-TAPRL algorithm
-    # indices = algo.run_PRM_TAPRL_feedback(iter_num)  # when training the agent
-    indices = test_policy.run_learned_policy_feedback(iter_num, trial_num=1)  # when testing the learned policy
+    indices = algo.run_PRM_TAPRL_feedback(iter_num, trial_num=3)  # when training the agent
+    # indices = test_policy.run_learned_policy_feedback(iter_num, trial_num=1)  # when testing the learned policy
 
     return indices
 
@@ -30,8 +30,8 @@ def run_update(iter_num):
     # PRM-TAPRL algorithm
 
     # run TAPRL algorithm
-    # algo.run_PRM_TAPRL_update(iter_num)    # when training the agent
-    test_policy.run_learned_policy_update(iter_num, trial_num=1)  # when testing the learned policy
+    algo.run_PRM_TAPRL_update(iter_num, trial_num=3)    # when training the agent
+    # test_policy.run_learned_policy_update(iter_num, trial_num=1)  # when testing the learned policy
 
     return None
 
@@ -39,8 +39,12 @@ def run_update(iter_num):
 if __name__ == "__main__":
     import numpy as np
     import csv
-
-    for i in range(5):
+    from lib.indices_to_artifact_dims import artifact_to_indices
+    from lib.get_reward_from_AMSPnC_data import dummy_reward
+    for i in range(24):
         val = run_algo(i)
-        print(val)
+        indices = artifact_to_indices(val)
+        reward = dummy_reward(indices)
+        print(f'sample: {val}, reward: {reward}')
         run_update(i)
+    print('finished!')

@@ -33,3 +33,16 @@ def extract_rewards():
             reward_history.append(float(row[0]))
 
     return reward_history
+
+
+def dummy_reward(state):
+    target_reward = np.load('data/target_reward.npy')
+    target_reward = target_reward.T
+    reward_val = target_reward[state[0], state[1]]
+    with open('data/reward_history.csv', 'a', newline='') as csv_file:
+        reward_writer = csv.writer(csv_file)
+        reward_writer.writerow([reward_val])
+
+    csv_file.close()
+
+    return reward_val

@@ -6,7 +6,7 @@ from lib.get_reward_from_AMSPnC_data import extract_rewards
 from algorithm.utils import *
 
 
-def run_PRM_TAPRL_feedback(iter_num):
+def run_PRM_TAPRL_feedback(iter_num, trial_num):
     """
     Probabilistic reward modeling with temporal abstraction in physics guided reinforcement learning (PRM-TAPRL)
     -------------------------------------------------------------------------------------------------------------
@@ -40,9 +40,13 @@ def run_PRM_TAPRL_feedback(iter_num):
     # ---------------------------------
 
     if iter_num == 0:
-        # initial_state = [3, 1]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
-        initial_state = [1, 6]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
-        # initial_state = [1, 2]
+        if trial_num == 1:
+            initial_state = [1, 6]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
+        elif trial_num == 2:
+            initial_state = [3, 1]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
+        else:
+            initial_state = [1, 2]  # s = [d, lxy] ---> DO NOT CHANGE!!! This is fixed!!
+
         state = initial_state
 
         # initialize the following for later usages
@@ -83,7 +87,7 @@ def run_PRM_TAPRL_feedback(iter_num):
 
     # ------- update log file ------------------
     # open log file
-    log_file = open("experiment_no_{}_details.txt".format(exp_num), "a")
+    log_file = open("experiment_no_{}_{}_details.txt".format(exp_num, trial_num), "a")
     # update the log file
     current_artifact_details = "##### epoch: {} -----------------------------  \n" \
                                "      TAPRL feedback: ------------> \n" \
@@ -100,7 +104,7 @@ def run_PRM_TAPRL_feedback(iter_num):
     return artifact_dimension
 
 
-def run_PRM_TAPRL_update(iter_num):
+def run_PRM_TAPRL_update(iter_num, trial_num):
     """
     Algorithm:
     -------------------------------------------
@@ -138,8 +142,6 @@ def run_PRM_TAPRL_update(iter_num):
     # ---------------------------------
 
     # ------ parameters ----------------
-    alpha = 0.5
-    gamma = 0.99
     num_of_options = 5   # number of options to be created
     H = 5      # length of each option
     epsilon = 0.75    # exploration for creating options
@@ -198,15 +200,18 @@ def run_PRM_TAPRL_update(iter_num):
             # get KDE estimate
             dataset_post_KDE, rewards_kde_std = get_KDE_estimate(unique_artifacts, rewards_cache, iter_num)
             dataset = dataset_post_KDE
+            # save dataset
+            np.save(f'dump/dataset_{iter_num}.npy', dataset)
 
             # update log file
-            log_file = open("experiment_no_{}_details.txt".format(exp_num), "a")  # open log file
+            log_file = open("experiment_no_{}_{}_details.txt".format(exp_num, trial_num), "a")  # open log file
             option_create_details = "\n" + "\n" + "          Performing KDE calculations . . . . .\n" "\n" + "\n"
             log_file.write(option_create_details)
             log_file.close()  # close log file
 
             # ---- fit GP model ----
             source_reward_current = get_GP_reward_model(dataset, iter_num=iter_num, viz_model='smooth')
+
             # save reward model
             np.save('data/source_reward_current.npy', source_reward_current)
 
@@ -214,13 +219,18 @@ def run_PRM_TAPRL_update(iter_num):
         # STEP 2: ---> get source reward model (already in 6 x 8 shape, no need to modify)
         # -------------------------------------------------------------------
         R_source = get_source_reward_model(iter_num)    # load the source reward model
-
         # -------------------------------------------------------------------
         # STEP 3: ---> get optimal value function by training agent using current source reward model
         # note: the optimal value function is a one dimensional array of 48, convert it to 6x8 shape
         # -------------------------------------------------------------------
         opt_value_func = train_agent(R_source)
         opt_value_func = opt_value_func.reshape(6, 8)
+
+        # we need to create options from the best state not the current state
+        best_state = get_best_state(opt_value_func, H, state)
+        print(f'state:{state} --> best state: {best_state}')
+        # move to the best to create new set of options
+        state = best_state
 
         # create new set of options because cache is empty
         co = CreateOptions(state, H, epsilon, num_of_options, R_source, opt_value_func)
@@ -229,6 +239,7 @@ def run_PRM_TAPRL_update(iter_num):
         options_cache = options_info['options']
         options_states_cache = options_info['options states']
         subgoals_cache = options_info['subgoals states']
+
         # if duplicate states are needed to be removed: --->
         # options_states_cache = [list(t) for t in set(tuple(element) for element in options_states_cache)]
         log_file = open("experiment_no_{}_details.txt".format(exp_num), "a")   # open log file
@@ -270,6 +281,27 @@ def run_PRM_TAPRL_update(iter_num):
 
     log_file.write(details)
     log_file.close()
+
+    # --------------------------------------------------------------
+    # --------------------------------------------------------------
+    # -------------- save final dataset ----------------------------
+    # --------------------------------------------------------------
+    # --------------------------------------------------------------
+    if iter_num == 23:
+        stored_artifacts_latest = np.load('data/stored_artifacts.npy').tolist()  # save in a different name to overwrite later
+        # modify dataset for kernel density estimation: rearrange data to show only unique states and
+        reward_vals_latest = extract_rewards()  # extract reward from saved files
+        # rewards obtained at each state
+        unique_artifacts_latest, rewards_cache_latest = modify_dataset_KDE(
+            stored_artifacts, reward_vals_latest)
+
+        # get KDE estimate
+        dataset_post_KDE_latest, rewards_kde_std_latest = get_KDE_estimate(unique_artifacts_latest,
+                                                                           rewards_cache_latest, iter_num)
+        dataset_latest = dataset_post_KDE_latest
+        # save dataset
+        np.save(f'dump/dataset_{iter_num}.npy', dataset_latest)
+        r_model = get_GP_reward_model(dataset_latest, iter_num=iter_num, viz_model='smooth')
 
     return None
 

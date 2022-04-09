@@ -11,7 +11,7 @@ def plot_kde_estimate(rewards_cache, rewards_pred, rewards_kde_mean, rewards_kde
 
     for k in range(len(rewards_kde_mean)):
         y = np.array(rewards_cache[k])
-        x = np.linspace(min(y) - 1.0, max(y) + 1.0, 100)
+        x = np.linspace(min(y) - 0.5, max(y) + 0.5, 100)
         y_n = stats.norm.pdf(x, rewards_kde_mean[k], rewards_kde_std[k])
         y_n = y_n / sum(y_n)
 

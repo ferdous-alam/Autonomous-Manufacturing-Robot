@@ -6,7 +6,7 @@ from visualizations.plot_GP import plotGPmean
 from sklearn.neighbors import KernelDensity
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import LeaveOneOut
-from sklearn.gaussian_process.kernels import RBF
+from sklearn.gaussian_process.kernels import RBF, ConstantKernel
 
 
 def value_iteration(reward_model):
@@ -161,6 +161,7 @@ def train_agent(R_source):
     """
     # Here we will use dynamic programming to train the agent as the state-space
     # is relatively small.
+    R_source = R_source.T   # reshape into 6 x 8
     value_func = value_iteration(R_source)
 
     return value_func
@@ -182,7 +183,6 @@ def get_GP_reward_model(data_set, iter_num, viz_model=None):
     a decision.
 
     """
-
     # original value of inputs
     x1 = np.arange(700, 1100, 50)
     x2 = np.arange(350, 650, 50)
@@ -205,9 +205,9 @@ def get_GP_reward_model(data_set, iter_num, viz_model=None):
     #    optimizer is started 10 times from 10 different initial positions to calculate other kernel
     #    hyperparameters automatically
     # ------------------------------------------------------------
-    kernel = 1 * RBF(10, (1e-3, 1e3))
-    gp = GaussianProcessRegressor(kernel=kernel,
-                                  alpha=0.01, n_restarts_optimizer=10)
+    kernel = ConstantKernel(1.0, (1e-3, 1e3)) * RBF(10, (1e-4, 1e4))
+    gp = GaussianProcessRegressor(kernel=kernel, n_restarts_optimizer=10,
+                                  normalize_y=True)
     gp.fit(X_train, Y_train)
 
     # now we will calculate the posterior for arbitrary many points to
@@ -300,6 +300,24 @@ def get_KDE_estimate(unique_artifacts, rewards_cache, iter_num):
                       iter_num=iter_num, save_plot=True)
 
     return dataset, rewards_kde_std
+
+
+def get_best_state(value_func, H, state):
+    opt_policy = get_optimal_policy(func_type="value_func", value_func=value_func,
+                                    policy_length=H, start_state=state)
+
+    # dummy reward for calculating next_state
+    R_s = np.load('data/source_reward.npy')
+    R_s = R_s.T
+    # instantiate environment with given reward model
+    env = PnCMfg('source', R_s)
+
+    for k in range(len(opt_policy)):
+        action = opt_policy[k]
+        next_state, _ = env.step(state, action)
+        state = next_state
+    best_state = state
+    return best_state
 
 
 if __name__ == "__main__":

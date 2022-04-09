@@ -19,3 +19,13 @@ def indices_to_artifact_dims(indices):
                           lxy[indices[1]]]
 
     return artifact_dimension
+
+
+def artifact_to_indices(artifact):
+
+    lxy = np.arange(700, 1100, 50).tolist()
+    dia = np.arange(350, 650, 50).tolist()
+    indices = [dia.index(artifact[0]),
+               lxy.index(artifact[1])]
+
+    return indices

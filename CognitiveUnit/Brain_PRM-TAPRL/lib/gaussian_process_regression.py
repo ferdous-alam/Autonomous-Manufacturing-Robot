@@ -2,6 +2,7 @@ import numpy as np
 from numpy.linalg import inv
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
+from visualizations.plot_GP import plotGPmean
 
 
 class GaussianProcess:
@@ -24,7 +25,7 @@ class GaussianProcess:
     Rasmussen, Carl Edward. ”Gaussian processes in machine learning.”
      Summer School on Machine Learning. Springer, Berlin, Heidelberg, 2003.
     """
-    def __init__(self, X, Y, X_s, Y_s, length_scale,
+    def __init__(self, data, length_scale,
                  sigma_f, sigma_y):
         """
 
@@ -39,10 +40,14 @@ class GaussianProcess:
         self.length_scale = length_scale
         self.sigma_f = sigma_f
         self.sigma_y = sigma_y
-        self.X = X
-        self.Y = Y
-        self.X_s = X_s
-        self.Y_s = Y_s
+        self.X = np.array(data[0]).reshape(-1, 1)
+        self.Y = np.array(data[1]).reshape(-1, 1)
+
+        # make smooth prediction
+        dia_test = np.arange(350, 601, 1.0)
+        lxy_test = np.arange(700, 1051, 1.0)
+        self.X1_s, self.X2_s = np.meshgrid(dia_test, lxy_test)
+        self.X_s = np.c_[self.X1_s.ravel(), self.X2_s.ravel()]
 
     def kernel(self, X1, X2):
         """
@@ -59,7 +64,7 @@ class GaussianProcess:
         #     dists = spdist.cdist(X1, X2, metric='euclidean')
         #     K = self.sigma_f ** 2 * np.exp(-0.5 * dists / self.length_scale)
         norm = np.sum(X1 ** 2, 1).reshape(
-            -1, 1) + np.sum(X2 ** 2, 1) - 2 * np.dot(X1, X2.T)
+            -1, 1) + np.sum(X2 ** 2, 1).reshape(-1, 1) - 2 * np.dot(X1, X2.T)
         K = self.sigma_f ** 2 * np.exp(-0.5 / self.length_scale ** 2 * norm)
 
         return K
@@ -78,6 +83,9 @@ class GaussianProcess:
         cov_s = K_ss - K_s.T.dot(inv(Ky)).dot(K_s)
 
         return mu_s, cov_s
+
+    def plot_gp(self, Y_test):
+        plotGPmean(self.X_s, self.Y_s, Y_test, iter_num=1, save_plot=False)
 
 
 
