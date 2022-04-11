@@ -207,7 +207,7 @@ def get_GP_reward_model(data_set, iter_num, viz_model=None):
     # ------------------------------------------------------------
     kernel = ConstantKernel(1.0, (1e-3, 1e3)) * RBF(10, (1e-4, 1e4))
     gp = GaussianProcessRegressor(kernel=kernel, n_restarts_optimizer=10,
-                                  normalize_y=True)
+                                  normalize_y=False)
     gp.fit(X_train, Y_train)
 
     # now we will calculate the posterior for arbitrary many points to

@@ -143,7 +143,7 @@ def run_PRM_TAPRL_update(iter_num, trial_num):
 
     # ------ parameters ----------------
     num_of_options = 5   # number of options to be created
-    H = 5      # length of each option
+    H = 10      # length of each option
     epsilon = 0.75    # exploration for creating options
 
     # 9 possible actions to choose from
@@ -242,7 +242,7 @@ def run_PRM_TAPRL_update(iter_num, trial_num):
 
         # if duplicate states are needed to be removed: --->
         # options_states_cache = [list(t) for t in set(tuple(element) for element in options_states_cache)]
-        log_file = open("experiment_no_{}_details.txt".format(exp_num), "a")   # open log file
+        log_file = open("experiment_no_{}_{}_details.txt".format(exp_num, trial_num), "a")   # open log file
         option_create_details = "          Option creation: -----------------> \n"\
                                 "              Options created: {}, \n"\
                                 "              Options states: {}, \n"\
