@@ -7,7 +7,7 @@ def gen_data():
     dia = np.arange(350, 650, 50)
 
     X, Y = np.meshgrid(dia, lxy)
-    return X,Y,Rs,lxy,dia
+    return X, Y, Rs, lxy, dia
 
 #plt.figure(figsize=(12, 8))
 #ax = plt.axes(projection='3d')

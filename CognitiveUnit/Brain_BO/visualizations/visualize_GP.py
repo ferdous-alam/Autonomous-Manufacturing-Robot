@@ -1,18 +1,18 @@
 import numpy as np
 from sklearn.gaussian_process import GaussianProcessRegressor as GPR
-from sklearn.gaussian_process.kernels import RBF
+from sklearn.gaussian_process.kernels import RBF, ConstantKernel
 import warnings
 import matplotlib.pyplot as plt
 
-def plotGP(iter_num):
-    warnings.filterwarnings('ignore')#ignore warnings from sklearn
 
+def plotGP(iter_num):
+    #  ignore warnings from sklearn
+    warnings.filterwarnings('ignore')
 
     X_step = np.load('data/suggestions_history.npy')
-
     R_step = np.load('data/BO_reward_history.npy')
 
-    kernel = 1 * RBF(1, (1e-2, 1e2))
+    kernel = ConstantKernel(1.0, (1e-3, 1e3)) * RBF(1, (1e-2, 1e2))
     gp = GPR(kernel=kernel, alpha=.1, n_restarts_optimizer=10, normalize_y=False)
     gp.fit(X_step, R_step)
     lxy_test = np.linspace(350, 600, 1000)
@@ -31,7 +31,6 @@ def plotGP(iter_num):
     ax = plt.axes(projection='3d')
     ax.plot_surface(X1_org_test, X2_org_test, R_GP, cmap='viridis', edgecolor='none')
     plt.show()
-
 
     plt.savefig('figures/GP_iter_{}.pdf'.format(iter_num),
                 format='pdf', bbox_inches='tight', dpi=1200)
