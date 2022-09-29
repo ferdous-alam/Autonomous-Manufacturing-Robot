@@ -12,10 +12,10 @@ This repo contains all codes and related documentations for Autonomous Manufactu
 
 
 ## Contributors: 
-Md Ferdous Alam, Sarp Sezer
+Md Ferdous Alam 
 
-## Previous undergraduate interns:
-Christina Duong
+## Previous undergraduate students:
+Sarp Sezer, Christina Duong
 
 ## References: 
 
